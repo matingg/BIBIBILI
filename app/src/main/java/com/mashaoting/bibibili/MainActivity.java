@@ -1,25 +1,31 @@
 package com.mashaoting.bibibili;
 
-import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.mashaoting.bibibili.adapter.LisViewAdapter;
 import com.mashaoting.bibibili.adapter.MyViewPagerAdapter;
+import com.mashaoting.bibibili.base.BaseoActivity;
 import com.mashaoting.bibibili.directplay.fragment.DirectplayFragment;
 import com.mashaoting.bibibili.pursueplay.fragment.PursuePlayFragment;
 import com.mashaoting.bibibili.recommend.fragment.RecommendFragment;
 import com.mashaoting.bibibili.subarea.fragment.SubareaFragment;
-import com.mashaoting.bibibili.utils.DensityUtil;
-import com.slidingmenu.lib.SlidingMenu;
-import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
-import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
-public class MainActivity extends SlidingFragmentActivity {
+public class MainActivity extends BaseoActivity {
 
     @InjectView(R.id.toolBar)
     Toolbar toolBar;
@@ -31,23 +37,37 @@ public class MainActivity extends SlidingFragmentActivity {
     CoordinatorLayout coordinatorLayout;
     @InjectView(R.id.main_viewpager)
     ViewPager mainViewpager;
+    @InjectView(R.id.iv_title)
+    ImageView ivTitle;
+    @InjectView(R.id.title_iv_default_avatar)
+    ImageView titleIvDefaultAvatar;
+    @InjectView(R.id.title_left_menu)
+    LinearLayout titleLeftMenu;
+    @InjectView(R.id.title_iv_search)
+    ImageView titleIvSearch;
+    @InjectView(R.id.title_iv_right_menu)
+    ImageView titleIvRightMenu;
+    @InjectView(R.id.id_drawerlayout)
+    DrawerLayout idDrawerlayout;
+
+    @InjectView(R.id.rl_zuobuju)
+    RelativeLayout rlZuobuju;
+    @InjectView(R.id.lv_main_0)
+    ListView lvMain0;
+
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);//设置主页面
-        ButterKnife.inject(this);
+    public int getLayoutid() {
+        return R.layout.activity_main;
+    }
 
-        setBehindContentView(R.layout.left); //设置左侧菜单
+    @Override
+    protected void initTitle() {
 
-        SlidingMenu slidingMenu = getSlidingMenu();
-        slidingMenu.setSecondaryMenu(R.layout.left);
-        slidingMenu.setMode(SlidingMenu.LEFT); //设置模式
-        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);// 设置触摸屏幕的模式
-        // 设置滑动菜单视图的宽度
-        slidingMenu.setBehindOffset(DensityUtil.px2dip(this, 100));
+    }
 
-
+    @Override
+    protected void initData() {
         tabLayout.addTab(tabLayout.newTab().setText("直播"));
         tabLayout.addTab(tabLayout.newTab().setText("推荐"));
         tabLayout.addTab(tabLayout.newTab().setText("追番"));
@@ -64,15 +84,32 @@ public class MainActivity extends SlidingFragmentActivity {
         mainViewpager.setAdapter(viewPagerAdapter);//设置适配器
 
 
-//        Toolbar toolbar = new Toolbar(this);
-//        toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        toolbar.setTitle("这里是Title");
-//        toolbar.setSubtitle("这里是子标题");
-//        toolbar.setLogo(R.drawable.icon);
-//        setSupportActionBar(toolbar);
+    }
+
+    @Override
+    protected void initListener() {
+
+        View view = View.inflate(this , R.layout.zuo_title , null);
+        LisViewAdapter adapter = new LisViewAdapter(this);
+        lvMain0.addHeaderView(view);
+        lvMain0.setAdapter(adapter);
+        lvMain0.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "被点击了"+parent.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
+
+
+    @OnClick(R.id.iv_title)
+    public void onClick() {
+        Toast.makeText(MainActivity.this, "0", Toast.LENGTH_SHORT).show();
+        idDrawerlayout.openDrawer(rlZuobuju);
+    }
+
 
 
 }
