@@ -1,49 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:zhy="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#44ffffff"
-              android:orientation="vertical"
-              android:padding="8dp">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            xmlns:zhy="http://schemas.android.com/apk/res-auto"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:background="#44ffffff"
+                                            android:orientation="vertical"
+                                            android:padding="8dp">
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:drawableLeft="@drawable/ic_hint_search"
-        android:drawablePadding="15dp"
-        android:drawableRight="@drawable/ic_hint_search"
-        android:gravity="center_vertical"
-        android:text="搜索视频 ，番剧 ，up主或av号"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:text="大家都在搜"
-        android:textSize="16dp"/>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp">
-
-        <com.zhy.view.flowlayout.TagFlowLayout
-            android:id="@+id/id_flowlayout"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/tv_sousu"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            zhy:max_select="-1">
-        </com.zhy.view.flowlayout.TagFlowLayout>
+            android:background="#ffffff"
+            android:drawableLeft="@drawable/ic_hint_search"
+            android:drawablePadding="15dp"
+            android:drawableRight="@drawable/ic_hint_search"
+            android:gravity="center_vertical"
+            android:text="搜索视频 ，番剧 ，up主或av号"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:text="大家都在搜"
+            android:textSize="16dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/id_flowlayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                zhy:max_select="-1">
+            </com.zhy.view.flowlayout.TagFlowLayout>
 
 
-    </ScrollView>
+        </ScrollView>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="更多"
-        android:textColor="@color/colorPrimary"/>
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="-----------更多------------"
+            android:textColor="@color/colorPrimary"/>
+        <TextView
+            android:id="@+id/tv_more2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:visibility="gone"
+            android:text="-----------收起------------"
+            android:textColor="@color/colorPrimary"/>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

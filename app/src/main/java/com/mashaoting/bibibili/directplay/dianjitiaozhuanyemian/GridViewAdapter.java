@@ -59,8 +59,10 @@ public class GridViewAdapter extends BaseAdapter {
         partitionsBean = dataBean.get(position);
 
         viewHolder.tvGridviewBiaoti.setText(partitionsBean.getLives().get(position).getTitle());
-        viewHolder.guanzhonggeshu.setText("房间号:"+partitionsBean.getLives().get(position).getRoom_id()+"");
-        Glide.with(context).load(partitionsBean.getLives().get(position).getCover().getSrc()).into(viewHolder.ivGridview);
+        viewHolder.tvName.setText(partitionsBean.getLives().get(position).getOwner().getName());
+        viewHolder.guanzhonggeshu.setText(""+partitionsBean.getLives().get(position).getRoom_id()+"");
+        Glide.with(context).load(partitionsBean.getLives()
+                .get(position).getCover().getSrc()).into(viewHolder.ivGridview);
         return convertView;
     }
 
@@ -70,6 +72,8 @@ public class GridViewAdapter extends BaseAdapter {
         @InjectView(R.id.tv_gridview_biaoti)
         TextView tvGridviewBiaoti;
         @InjectView(R.id.tv_name)
+        TextView tvName8;
+        @InjectView(R.id.tvname_)
         TextView tvName;
         @InjectView(R.id.guanzhonggeshu)
         TextView guanzhonggeshu;

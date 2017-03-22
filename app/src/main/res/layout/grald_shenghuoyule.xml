@@ -1,15 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="8000dp"
               android:orientation="vertical">
 
-    <com.mashaoting.bibibili.directplay.fragment.MyGridView
-        android:id="@+id/gridview"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:numColumns="2"
 
-        ></com.mashaoting.bibibili.directplay.fragment.MyGridView>
 
-</LinearLayout>
+
+        <com.mashaoting.bibibili.directplay.fragment.MyGridView
+            android:id="@+id/gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#EAEAEA"
+            android:horizontalSpacing="8dp"
+
+            android:numColumns="2"
+            android:verticalSpacing="8dp"
+
+            ></com.mashaoting.bibibili.directplay.fragment.MyGridView>
+
+</ScrollView >

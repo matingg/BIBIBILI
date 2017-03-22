@@ -133,21 +133,23 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
         return null;
     }
 
+
     @Override
     public int getItemCount() {
         return 3;
     }
 
+
     static class GridViewViewHolder extends RecyclerView.ViewHolder {
+        private final Context context;
         @InjectView(R.id.gridview)
         MyGridView gridview;
-        private Context context;
 
         GridViewViewHolder(Context context, View view) {
             super(view);
             ButterKnife.inject(this, view);
-
             this.context = context;
+
         }
 
 
@@ -158,95 +160,96 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
     }
 
 
-    //-------------------------------------------------------------------------------------------------------------
+
+
 //-------------------------------------------------------------------------------------------------------------
-    static class SmiloTetleViewHolder extends RecyclerView.ViewHolder {
-        @InjectView(R.id.tva1)
-        TextView tva1;
-        @InjectView(R.id.tva2)
-        TextView tva2;
+//-------------------------------------------------------------------------------------------------------------
+static class SmiloTetleViewHolder extends RecyclerView.ViewHolder {
+    @InjectView(R.id.tva1)
+    TextView tva1;
+    @InjectView(R.id.tva2)
+    TextView tva2;
 
-        @InjectView(R.id.tva4)
-        TextView tva4;
-        @InjectView(R.id.tva5)
-        TextView tva5;
-        @InjectView(R.id.tv_zhuanqu)
-        TextView zhuangqu;
-        @InjectView(R.id.zhibogeshu)
-        TextView zhibogeshu;
+    @InjectView(R.id.tva4)
+    TextView tva4;
+    @InjectView(R.id.tva5)
+    TextView tva5;
+    @InjectView(R.id.tv_zhuanqu)
+    TextView zhuangqu;
+    @InjectView(R.id.zhibogeshu)
+    TextView zhibogeshu;
 
-        SmiloTetleViewHolder(final Context context, View view) {
-            super(view);
-            ButterKnife.inject(this, view);
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "view", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-        public void setData(DirectplayZBBean.DataBean.PartitionsBean.PartitionBean name) {
-            zhuangqu.setText(name.getName());
-            zhibogeshu.setText("有" + name.getCount() + "在直播");
-        }
+    SmiloTetleViewHolder(final Context context, View view) {
+        super(view);
+        ButterKnife.inject(this, view);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "view", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+    public void setData(DirectplayZBBean.DataBean.PartitionsBean.PartitionBean name) {
+        zhuangqu.setText(name.getName());
+        zhibogeshu.setText("有" + name.getCount() + "在直播");
+    }
+}
 
 
 //----------------------------------------------------------------------------------------------------------------
 
-    //            banner   横幅
-    class BannerViewHolder extends RecyclerView.ViewHolder {
-        private final Context context;
-        @InjectView(R.id.banner)
-        Banner banner;
+//            banner   横幅
+class BannerViewHolder extends RecyclerView.ViewHolder {
+    private final Context context;
+    @InjectView(R.id.banner)
+    Banner banner;
 
-        BannerViewHolder(Context context, View view) {
-            super(view);
-            ButterKnife.inject(this, view);
-            this.context = context;
-        }
-
-
-        public void setData(final List<DirectplayZBBean.DataBean.BannerBean> bannerbean) {
-            //准备图片集合
-            List<String> imageUrls = new ArrayList<>();
-            for (int i = 0; i < 2; i++) {
-                imageUrls.add(bannerbean.get(0).getImg());
-            }
-
-            //简单使用
-            banner.setImages(imageUrls)
-                    .setImageLoader(new ImageLoader() {
-                        @Override
-                        public void displayImage(Context context, Object path, ImageView imageView) {
-
-                            Glide.with(context)
-                                    .load(path)
-//                                    .fitCenter()
-//                                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                                    .crossFade()
-                                    .into(imageView);
-                        }
-                    }).start();
-
-            //设置动画效果-手风琴效果
-            banner.setBannerAnimation(AccordionTransformer.class);
-
-
-            //设置点击事件
-            banner.setOnBannerListener(new OnBannerListener() {
-                @Override
-                public void OnBannerClick(int position) {
-                    Toast.makeText(context, "position" + position, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, BannerInfoActivity.class);
-                    intent.putExtra("intent", bannerbean.get(0).getLink());
-                    context.startActivity(intent);
-                }
-            });
-        }
+    BannerViewHolder(Context context, View view) {
+        super(view);
+        ButterKnife.inject(this, view);
+        this.context = context;
     }
 
+
+    public void setData(final List<DirectplayZBBean.DataBean.BannerBean> bannerbean) {
+        //准备图片集合
+        List<String> imageUrls = new ArrayList<>();
+        for (int i = 0; i < 2; i++) {
+            imageUrls.add(bannerbean.get(0).getImg());
+        }
+
+        //简单使用
+        banner.setImages(imageUrls)
+                .setImageLoader(new ImageLoader() {
+                    @Override
+                    public void displayImage(Context context, Object path, ImageView imageView) {
+
+                        Glide.with(context)
+                                .load(path)
+//                                    .fitCenter()
+//                                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                                .crossFade()
+                                .into(imageView);
+                    }
+                }).start();
+
+        //设置动画效果-手风琴效果
+        banner.setBannerAnimation(AccordionTransformer.class);
+
+
+        //设置点击事件
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                Toast.makeText(context, "position" + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, BannerInfoActivity.class);
+                intent.putExtra("intent", bannerbean.get(0).getLink());
+                context.startActivity(intent);
+            }
+        });
+    }
+}
 
 
 }

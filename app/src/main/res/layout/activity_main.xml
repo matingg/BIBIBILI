@@ -1,9 +1,11 @@
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                        xmlns:tools="http://schemas.android.com/tools"
-                                        android:id="@+id/id_drawerlayout"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/id_drawerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     >
+
 
     <android.support.design.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -50,10 +52,11 @@
             <!-- content view .....-->
 
 
-            <com.mashaoting.bibibili.ui.MyViewPager
-                android:id="@+id/main_viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"></com.mashaoting.bibibili.ui.MyViewPager>
+                <com.mashaoting.bibibili.ui.MyViewPager
+                    android:id="@+id/main_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></com.mashaoting.bibibili.ui.MyViewPager>
+
         </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
@@ -61,9 +64,9 @@
     <RelativeLayout
         android:id="@+id/rl_zuobuju"
         android:layout_width="240dp"
-        android:background="#ffffff"
+        android:layout_height="match_parent"
         android:layout_gravity="left"
-        android:layout_height="match_parent">
+        android:background="#ffffff">
 
         <include layout="@layout/zuo_bode"/>
     </RelativeLayout>
