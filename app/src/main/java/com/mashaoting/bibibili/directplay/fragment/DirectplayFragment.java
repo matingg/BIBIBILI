@@ -1,8 +1,7 @@
 package com.mashaoting.bibibili.directplay.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -56,7 +55,6 @@ public class DirectplayFragment extends BaseFragment {
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e("TAG", "1111111111111111111111111DirectplayFragment onError()" + e);
 
                     }
 
@@ -64,11 +62,15 @@ public class DirectplayFragment extends BaseFragment {
                     public void onResponse(String response, int id) {
                         Gson gson = new Gson();
                         directplayZBBean = gson.fromJson(response, DirectplayZBBean.class);
-                        Log.e("TAG", "DirectplayFragment onResponse()" + directplayZBBean.getData().getBanner().get(0).getTitle());
 
                         RecyLerViewAdapter adapter = new RecyLerViewAdapter(context, directplayZBBean.getData());
                         recylerview.setAdapter(adapter);
-                        recylerview.setLayoutManager(new LinearLayoutManager(context));
+
+
+                        //布局管理器有问题  最左边充不满
+//                        recylerview.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+                        recylerview.setLayoutManager(new GridLayoutManager(context, 1));
+
                     }
 
 

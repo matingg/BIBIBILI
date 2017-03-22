@@ -18,6 +18,7 @@ import com.mashaoting.bibibili.adapter.LisViewAdapter;
 import com.mashaoting.bibibili.adapter.MyViewPagerAdapter;
 import com.mashaoting.bibibili.base.BaseoActivity;
 import com.mashaoting.bibibili.directplay.fragment.DirectplayFragment;
+import com.mashaoting.bibibili.discover.fragment.DiscoverFragment;
 import com.mashaoting.bibibili.pursueplay.fragment.PursuePlayFragment;
 import com.mashaoting.bibibili.recommend.fragment.RecommendFragment;
 import com.mashaoting.bibibili.subarea.fragment.SubareaFragment;
@@ -80,9 +81,9 @@ public class MainActivity extends BaseoActivity {
         viewPagerAdapter.addFragment(new RecommendFragment(), "推荐");
         viewPagerAdapter.addFragment(new PursuePlayFragment(), "追番");
         viewPagerAdapter.addFragment(new SubareaFragment(), "分区");
-        viewPagerAdapter.addFragment(new DirectplayFragment(), "发现");
+        viewPagerAdapter.addFragment(new DiscoverFragment(), "发现");
         mainViewpager.setAdapter(viewPagerAdapter);//设置适配器
-
+        mainViewpager.setOffscreenPageLimit(5);
 
     }
 

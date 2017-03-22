@@ -1,16 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <!--<TextView-->
-        <!--android:id="@+id/tva"-->
-        <!--android:layout_weight="1"-->
-        <!--android:drawableTop="@drawable"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:text="关注"-->
-        <!--/>-->
+              android:layout_height="wrap_content"
+              android:background="#fff"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/tva1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:layout_weight="1"
+        android:drawableTop="@drawable/live_home_follow_anchor"
+        android:gravity="center"
+        android:paddingLeft="10dp"
+        android:text="关注"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tva2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/live_home_live_center"
+        android:gravity="center"
+        android:text="中心"
+        android:textSize="18sp"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tva4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/live_home_search_room"
+        android:gravity="center"
+        android:text="搜索"
+        android:textSize="18sp"
+        />
+
+    <TextView
+        android:id="@+id/tva5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:drawableTop="@drawable/live_home_all_category"
+        android:gravity="center"
+        android:text="分类"
+        android:textSize="14sp"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="#ff00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_zhuanqu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="专区"
+            android:layout_weight="1"
+            android:paddingLeft="20dp"
+            android:drawableLeft="@drawable/ic_navigation_drawer"/>
+
+        <TextView
+            android:id="@+id/zhibogeshu"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:text="当前有123个直播"/>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

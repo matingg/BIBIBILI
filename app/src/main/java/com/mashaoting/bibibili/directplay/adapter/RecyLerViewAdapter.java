@@ -7,12 +7,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.directplay.bean.DirectplayZBBean;
 import com.mashaoting.bibibili.directplay.dianjitiaozhuanyemian.BannerInfoActivity;
+import com.mashaoting.bibibili.directplay.dianjitiaozhuanyemian.GridViewAdapter;
+import com.mashaoting.bibibili.directplay.fragment.MyGridView;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -82,10 +85,10 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
 
         } else if (position == CHANNEL) {  //频道
             currentType = CHANNEL;
+        } else if (position == ACT) {  //活动
+            currentType = ACT;
         }
-//        else if (position == ACT) {  //活动
-//            currentType = ACT;
-//        } else if (position == SECKILL) {  // 秒杀
+//        else if (position == SECKILL) {  // 秒杀
 //            currentType = SECKILL;
 //        } else if (position == RECOMMEND) {  //推荐
 //            currentType = RECOMMEND;
@@ -95,18 +98,6 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
         return currentType; //当前类型
     }
 
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == BANNER) {  // 横幅
-
-            return new BannerViewHolder(context, inflater.inflate(R.layout.banner_viewpager, null));
-
-        }else if(viewType == BANNER) {
-//            return new SmiloTetleViewHolder(context, inflater.inflate(R.layout.smilo_tetle, null));
-        }
-
-        return null;
-    }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -115,17 +106,94 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
             //设置数据Banner的数据
             bannerViewHolder.setData(dataBean.getBanner());
 
+        } else if (getItemViewType(position) == CHANNEL) {
+            SmiloTetleViewHolder bannerViewHolder = (SmiloTetleViewHolder) holder;
+            //设置数据Banner的数据
+            bannerViewHolder.setData(dataBean.getPartitions().get(position).getPartition());
+
+        } else if (getItemViewType(position) == ACT) {
+            GridViewViewHolder bannerViewHolder = (GridViewViewHolder) holder;
+            //设置数据Banner的数据
+            bannerViewHolder.setData(dataBean.getPartitions());
         }
-//        else if(getItemViewType(position) ==) {
-//
-//        }
+    }
+
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (viewType == BANNER) {  // 横幅
+
+            return new BannerViewHolder(context, inflater.inflate(R.layout.banner_viewpager, null));
+
+        } else if (viewType == CHANNEL) {
+            return new SmiloTetleViewHolder(context, inflater.inflate(R.layout.smilo_tetle, null));
+        } else if (viewType == ACT) {
+            return new GridViewViewHolder(context, inflater.inflate(R.layout.grald_shenghuoyule, null));
+        }
+
+        return null;
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return 3;
     }
 
+    static class GridViewViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.gridview)
+        MyGridView gridview;
+        private Context context;
+
+        GridViewViewHolder(Context context, View view) {
+            super(view);
+            ButterKnife.inject(this, view);
+
+            this.context = context;
+        }
+
+
+        public void setData(List<DirectplayZBBean.DataBean.PartitionsBean> partitions) {
+            GridViewAdapter adapter = new GridViewAdapter(context, partitions);
+            gridview.setAdapter(adapter);
+        }
+    }
+
+
+    //-------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
+    static class SmiloTetleViewHolder extends RecyclerView.ViewHolder {
+        @InjectView(R.id.tva1)
+        TextView tva1;
+        @InjectView(R.id.tva2)
+        TextView tva2;
+
+        @InjectView(R.id.tva4)
+        TextView tva4;
+        @InjectView(R.id.tva5)
+        TextView tva5;
+        @InjectView(R.id.tv_zhuanqu)
+        TextView zhuangqu;
+        @InjectView(R.id.zhibogeshu)
+        TextView zhibogeshu;
+
+        SmiloTetleViewHolder(final Context context, View view) {
+            super(view);
+            ButterKnife.inject(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "view", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        public void setData(DirectplayZBBean.DataBean.PartitionsBean.PartitionBean name) {
+            zhuangqu.setText(name.getName());
+            zhibogeshu.setText("有" + name.getCount() + "在直播");
+        }
+    }
+
+
+//----------------------------------------------------------------------------------------------------------------
 
     //            banner   横幅
     class BannerViewHolder extends RecyclerView.ViewHolder {
@@ -178,4 +246,7 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
             });
         }
     }
+
+
+
 }
