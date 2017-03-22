@@ -97,6 +97,7 @@ public class MainActivity extends BaseoActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(MainActivity.this, "被点击了"+parent.toString(), Toast.LENGTH_SHORT).show();
+                idDrawerlayout.closeDrawers();
             }
         });
 
