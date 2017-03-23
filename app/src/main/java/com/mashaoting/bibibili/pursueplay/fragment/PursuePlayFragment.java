@@ -1,9 +1,8 @@
 package com.mashaoting.bibibili.pursueplay.fragment;
 
-import android.graphics.Color;
 import android.view.View;
-import android.widget.TextView;
 
+import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.base.BaseFragment;
 
 /**
@@ -14,17 +13,14 @@ import com.mashaoting.bibibili.base.BaseFragment;
  */
 
 public class PursuePlayFragment extends BaseFragment {
-    TextView textView ; //必须在下面 new 否则 空指针
+
     @Override
     public View initView() {
-        textView = new TextView(context);
-        textView.setTextColor(Color.BLUE);
-        textView.setTextSize(32);
-        return textView;
+      View view  = View.inflate(context , R.layout.zhuifan ,null);
+        return view;
     }
 
     @Override
     public void initData() {
-        textView.setText("追番窗口");
     }
 }

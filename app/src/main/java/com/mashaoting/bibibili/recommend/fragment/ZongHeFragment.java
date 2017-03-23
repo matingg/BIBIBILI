@@ -1,6 +1,5 @@
 package com.mashaoting.bibibili.recommend.fragment;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.GridView;
 
@@ -8,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.base.BaseFragment;
 import com.mashaoting.bibibili.directplay.bean.DirectplayZBBean;
+import com.mashaoting.bibibili.recommend.adapter.ZHGridViewAdapter;
 import com.mashaoting.bibibili.recommend.bean.ZongHeBean;
 import com.mashaoting.bibibili.utils.NetId;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -60,8 +60,9 @@ public class ZongHeFragment extends BaseFragment {
                     public void onResponse(String response, int id) {
                         ZongHeBean zongHeBean = JSON.parseObject(response, ZongHeBean.class);
 
-                        Log.e("TAG", "ZongHeFragment onResponse()"
-                        +zongHeBean.getData().get(0).getTitle());
+                        ZHGridViewAdapter adapter = new ZHGridViewAdapter(context ,zongHeBean.getData());
+
+                        gvZonghe.setAdapter(adapter);
                     }
                 });
     }
