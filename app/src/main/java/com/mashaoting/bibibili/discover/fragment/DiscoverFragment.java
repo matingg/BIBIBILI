@@ -1,6 +1,7 @@
 package com.mashaoting.bibibili.discover.fragment;
 
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,28 +44,23 @@ public class DiscoverFragment extends BaseFragment {
     TextView tvMore;
     @InjectView(R.id.tv_more2)
     TextView tvMore2;
+    @InjectView(R.id.id_flowlayout1)
+    TagFlowLayout idFlowlayout1;
+    @InjectView(R.id.nestedscrllview)
+    NestedScrollView nestedscrllview;
     private FaXianBean faXianBean;
-    private int widthPixels;
-    private int heightPixels;
-    private ViewGroup.LayoutParams layoutParams;
 
     @Override
     public View initView() {
         View view = View.inflate(context, R.layout.faxian, null);
         ButterKnife.inject(this, view);
-
         return view;
     }
-
 
     @Override
     public void initData() {
         getDataFromNet();
-
-
     }
-
-    boolean isok = false;
 
     @OnClick({R.id.tv_sousu, R.id.tv_more, R.id.tv_more2})
     public void onClick(View view) {
@@ -72,35 +68,55 @@ public class DiscoverFragment extends BaseFragment {
             case R.id.tv_sousu:
                 break;
             case R.id.tv_more:
-                isok = !isok;
-                if(isok) {
-                    initListener(faXianBean.getData().getList(), isok);
-                    tvMore.setText("更多");
-                }else {
-                    tvMore.setText("收起");
-                    initListener(faXianBean.getData().getList(), isok);
-                }
-
-                initListener(faXianBean.getData().getList(), isok);
-//                tvMore.setVisibility(View.GONE);
-//                tvMore2.setVisibility(View.INVISIBLE);
-                Log.e("TAG", "DiscoverFragment onClick()");
+                idFlowlayout1.setVisibility(View.GONE);
+                nestedscrllview.setVisibility(View.VISIBLE);
+                tvMore.setVisibility(View.GONE);
+                tvMore2.setVisibility(View.VISIBLE);
+                initListener(faXianBean.getData().getList());
                 break;
             case R.id.tv_more2:
-//                tvMore2.setVisibility(View.GONE);
-//                tvMore.setVisibility(View.INVISIBLE);
-
+                idFlowlayout1.setVisibility(View.VISIBLE);
+                nestedscrllview.setVisibility(View.GONE);
+                tvMore2.setVisibility(View.GONE);
+                tvMore.setVisibility(View.VISIBLE);
+                initListener(faXianBean.getData().getList());
                 break;
         }
+
+
     }
 
-    private void initListener(final List<FaXianBean.DataBean.ListBean> list, boolean isok) {
-        int a = 1;
-        if (isok) {
-            a = 4;
-        }
+    private void initListener1(final List<FaXianBean.DataBean.ListBean> list) {
+
         List<String> stringList = new ArrayList<>();
-        for (int i = 0; i < list.size() / a; i++) {
+        for (int i = 0; i < list.size(); i++) {
+            stringList.add(list.get(i).getKeyword());
+        }
+
+        idFlowlayout1.setAdapter(new TagAdapter<String>(stringList) {
+            @Override
+            public View getView(FlowLayout parent, final int position, String s) {
+                TextView tv = new TextView(context);
+                tv.setText(s);
+                tv.setTextSize(20);
+                tv.setBackgroundResource(R.drawable.tututu);
+                tv.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context, "被点击了" + list.get(position).getKeyword(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+                return tv;
+            }
+        });
+
+    }
+
+
+    private void initListener(final List<FaXianBean.DataBean.ListBean> list) {
+
+        List<String> stringList = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
             stringList.add(list.get(i).getKeyword());
         }
 
@@ -109,7 +125,7 @@ public class DiscoverFragment extends BaseFragment {
             public View getView(FlowLayout parent, final int position, String s) {
                 TextView tv = new TextView(context);
                 tv.setText(s);
-                tv.setTextSize(10);
+                tv.setTextSize(20);
                 tv.setBackgroundResource(R.drawable.tututu);
                 tv.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -141,7 +157,7 @@ public class DiscoverFragment extends BaseFragment {
                         Gson gson = new Gson();
                         faXianBean = gson.fromJson(response, FaXianBean.class);
                         Log.e("TAG", "DiscoverFragment ----onResponse()" + response);
-                        initListener(faXianBean.getData().getList(), true);
+                        initListener1(faXianBean.getData().getList());
                     }
                 });
 

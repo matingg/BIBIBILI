@@ -31,20 +31,38 @@
             android:text="大家都在搜"
             android:textSize="16dp"/>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
 
             <com.zhy.view.flowlayout.TagFlowLayout
-                android:id="@+id/id_flowlayout"
+                android:id="@+id/id_flowlayout1"
+
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="112dp"
                 android:padding="5dp"
                 zhy:max_select="-1">
             </com.zhy.view.flowlayout.TagFlowLayout>
 
 
-        </ScrollView>
+
+
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/nestedscrllview"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:visibility="gone">
+
+            <com.zhy.view.flowlayout.TagFlowLayout
+                android:id="@+id/id_flowlayout"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:padding="5dp"
+                zhy:max_select="-1"
+                >
+            </com.zhy.view.flowlayout.TagFlowLayout>
+
+
+        </android.support.v4.widget.NestedScrollView>
 
         <TextView
             android:id="@+id/tv_more"
@@ -53,13 +71,14 @@
             android:gravity="center_horizontal"
             android:text="-----------更多------------"
             android:textColor="@color/colorPrimary"/>
+
         <TextView
             android:id="@+id/tv_more2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:visibility="gone"
             android:text="-----------收起------------"
-            android:textColor="@color/colorPrimary"/>
+            android:textColor="@color/colorPrimary"
+            android:visibility="gone"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
