@@ -17,15 +17,20 @@ public class LoadNet {
 
         AsyncHttpClient httpClient = new AsyncHttpClient();
 
+
+
         httpClient.post(url, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.e("TAG", "LoadNet onSuccess()"+responseBody);
+               if(http != null) {
+               }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("TAG", "LoadNet ++++++++++++++++++ getDataPost()");
                 Log.e("TAG", "LoadNet onSuccess()"+error);
+                Log.e("TAG", "LoadNet ++++++++++++++++++ getDataPost()");
             }
         });
     }

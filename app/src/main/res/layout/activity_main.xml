@@ -38,6 +38,7 @@
                 android:background="#fb7299"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
+
                 app:tabSelectedTextColor="#ff0000"
                 app:tabTextColor="#ffffff"/>
 
