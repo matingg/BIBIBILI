@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_gridview_0"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:background="@drawable/bangumi_follow_ic_index"
+        android:scaleType="fitXY"
+        />
+
+    <TextView
+        android:id="@+id/textview_0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLength="2"
+        android:text="标题"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/text_renshu_0"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="光看人数"
+        />
+        <TextView
+            android:id="@+id/text_renshu_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="光看人数"
+            />
+    </LinearLayout>
+
+</LinearLayout>

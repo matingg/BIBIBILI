@@ -10,8 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.pursueplay.bean.ZhuiFanBean;
-
-import java.util.List;
+import com.youth.banner.Banner;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,24 +23,24 @@ public class ZFGridAdapter extends BaseAdapter {
 
 
     private final Context context;
-    private final List<ZhuiFanBean.ResultBean.PreviousBean.ListBean> datas;
+    private final ZhuiFanBean.ResultBean resultBean;
+    private ZhuiFanBean.ResultBean.PreviousBean.ListBean listBean;
 
 
-
-    public ZFGridAdapter(Context context, List<ZhuiFanBean.ResultBean.PreviousBean.ListBean> list) {
+    public ZFGridAdapter(Context context, ZhuiFanBean.ResultBean datas) {
         this.context = context;
-        datas = list;
+        resultBean = datas;
     }
 
 
     @Override
     public int getCount() {
-        return datas.size();
+        return (resultBean.getPrevious().getSeason());
     }
 
     @Override
     public Object getItem(int position) {
-        return datas.get(position);
+        return resultBean.getPrevious();
     }
 
     @Override
@@ -59,14 +58,18 @@ public class ZFGridAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        ZhuiFanBean.ResultBean.PreviousBean.ListBean listBean = datas.get(position);
+//        Glide.with(context).load(resultBean.getAd().getHead().get(position)).into(viewHolder.banner);
+        listBean = resultBean.getPrevious().getList().get(position);
         Glide.with(context).load(listBean.getCover()).into(viewHolder.ivZfItemTupian);
+
         viewHolder.tvNameZf.setText(listBean.getTitle());
         viewHolder.tvGengxin.setText("更新至"+listBean.getNewest_ep_index()+"话");
         return convertView;
     }
 
     static class ViewHolder {
+        @InjectView(R.id.banner)
+        Banner banner;
         @InjectView(R.id.iv_zf_item_tupian)
         ImageView ivZfItemTupian;
         @InjectView(R.id.tv_ren_o_shu)

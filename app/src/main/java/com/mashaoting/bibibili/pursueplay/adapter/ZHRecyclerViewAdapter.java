@@ -6,15 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.pursueplay.bean.ZhuiFanBean;
-
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,7 +19,7 @@ import butterknife.OnClick;
  * Created by 麻少亭 on 2017/3/23.
  */
 
-public class ZHRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ZHRecyclerViewAdapter extends RecyclerView.Adapter {
 
 
     private final Context context;
@@ -32,6 +27,7 @@ public class ZHRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     private final LayoutInflater layoutInflater;
     private static final int ASD = 0;
     private static final int ASF = 1;
+
 
     private int currenttype;
 
@@ -46,11 +42,11 @@ public class ZHRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public int getItemViewType(int position) {
         if (position == ASD) {
             currenttype = ASD;
-            return currenttype;
+
         }
 //        else if (position == ASF) {
 //            currenttype = ASF;
-//            return currenttype;
+//
 //
 //        }
         return currenttype;
@@ -62,11 +58,12 @@ public class ZHRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
             return new ViewHolder(context, layoutInflater.inflate(R.layout.recyclerview_item, null));
 
-        } else if (ASF == viewType) {
-
-//            return new ViewHolder(context, layoutInflater.inflate(R.layout.recyclerview_2_item, null));
-
         }
+//        else if (ASF == viewType) {
+//
+//            return new ViewHolder2(context, layoutInflater.inflate(R.layout.recyclerview_2_item, null));
+//
+//        }
         return null;
     }
 
@@ -74,11 +71,12 @@ public class ZHRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == ASD) {
             ViewHolder viewHolder = (ViewHolder) holder;
-            viewHolder.setData(context, datas.getPrevious().getList());
-        } else if (getItemViewType(position) == ASF) {
+            viewHolder.setData(context, datas);
+        }
+//        else if (getItemViewType(position) == ASF) {
 //            ViewHolder2 viewholder2 = (ViewHolder2) holder;
 //            viewholder2.setData(context, datas.getAd().getHead());
-        }
+//        }
 
 
     }
@@ -88,47 +86,49 @@ public class ZHRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return 4;
     }
 
-    class ViewHolder2 extends RecyclerView.ViewHolder {
-        @InjectView(R.id.recylerview_2_item_iv)
-        GridView recylerview2ItemIv;
+//    class ViewHolder2 extends RecyclerView.ViewHolder {
+//        @InjectView(R.id.recylerview_2_item_iv)
+//        GridView recylerview2ItemIv;
+//        private final Context context1;
+//        public ViewHolder2(Context context, View inflate) {
+//            super(inflate);
+//            context1 = context ;
+//        }
+//
+//
+//        public void setData(Context context, List<ZhuiFanBean.ResultBean.AdBean.HeadBean> head) {
+//
+//        }
+//    }
+//
 
-        ViewHolder2(View view) {
-            super(view);
-            ButterKnife.inject(this, view);
-        }
-
-        public void setData(Context context, List<ZhuiFanBean.ResultBean.AdBean.HeadBean> head) {
-            GridViewAdapter2 adapter = new GridViewAdapter2(context, head);
-            recylerview2ItemIv.setAdapter(adapter);
-        }
-    }
-
-
-    class ViewHolder extends RecyclerView.ViewHolder {
-        private final Context context;
+    static class ViewHolder extends RecyclerView.ViewHolder {
+        private Context context;
         @InjectView(R.id.gv_zhuifan)
         GridView gvZhuifan;
-        @InjectView(R.id.rl_fanju)
-        RelativeLayout rlFanju;
-        @InjectView(R.id.rl_guoju)
-        RelativeLayout rlGuoju;
-        @InjectView(R.id.tv_time)
-        TextView tvTime;
-        @InjectView(R.id.tv_suoyin)
-        TextView tvSuoyin;
-        @InjectView(R.id.look_tuijian)
-        ImageView lookTuijian;
+
+//        @InjectView(R.id.rl_fanju)
+//        RelativeLayout rlFanju;
+//        @InjectView(R.id.rl_guoju)
+//        RelativeLayout rlGuoju;
+//        @InjectView(R.id.tv_time)
+//        TextView tvTime;
+//        @InjectView(R.id.tv_suoyin)
+//        TextView tvSuoyin;
+//        @InjectView(R.id.look_tuijian)
+//        ImageView lookTuijian;
 
         ViewHolder(Context context, View view) {
             super(view);
             ButterKnife.inject(this, view);
             this.context = context;
 
+
         }
 
 
-        public void setData(Context context, List<ZhuiFanBean.ResultBean.PreviousBean.ListBean> list) {
-            ZFGridAdapter adapter = new ZFGridAdapter(context, list);
+        public void setData(Context context, ZhuiFanBean.ResultBean datas) {
+            ZFGridAdapter adapter = new ZFGridAdapter(context, datas);
             gvZhuifan.setAdapter(adapter);
         }
     }

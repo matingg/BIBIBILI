@@ -1,7 +1,8 @@
 package com.mashaoting.bibibili.subarea.fragment;
 
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.alibaba.fastjson.JSON;
@@ -13,6 +14,8 @@ import com.mashaoting.bibibili.subarea.bean.FenQuBean;
 import com.mashaoting.bibibili.utils.NetId;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -30,6 +33,8 @@ public class SubareaFragment extends BaseFragment {
     RecyclerView myRecyclerView;
 
     private FenQuBean fenQuBean;
+
+    private List<FenQuBean.DataBean> data;
 
     @Override
     public View initView() {
@@ -52,18 +57,18 @@ public class SubareaFragment extends BaseFragment {
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
+
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        fenQuBean = JSON.parseObject(response, FenQuBean.class);
-
-                        FenQuRecyclerAdapter adapter = new FenQuRecyclerAdapter(context, fenQuBean.getData().getNewX());
+                        fenQuBean = JSON.parseObject(response,FenQuBean.class);
+                        data = fenQuBean.getData();
+                        Log.e("TAG", "S4444444444444444444444444444"+data.get(0).getBody().get(0).getTitle());
+                        Log.e("TAG", "S4444444444444444444444444444"+data.get(0).getTitle());
+                        FenQuRecyclerAdapter adapter = new FenQuRecyclerAdapter(context , data);
                         myRecyclerView.setAdapter(adapter);
-                        GridLayoutManager gridLayoutManager =  new GridLayoutManager(context,1);
-                        myRecyclerView.setLayoutManager(gridLayoutManager);
-//                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context , LinearLayoutManager.VERTICAL ,false);
-//                        myRecyclerView.setLayoutManager(linearLayoutManager);
+                        myRecyclerView.setLayoutManager(new LinearLayoutManager(context , 1 ,false));
                     }
 
                 });

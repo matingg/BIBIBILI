@@ -1,7 +1,6 @@
 package com.mashaoting.bibibili.subarea.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,9 +9,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mashaoting.bibibili.R;
+import com.mashaoting.bibibili.directplay.dianjitiaozhuanyemian.CornersTransform;
 import com.mashaoting.bibibili.subarea.bean.FenQuBean;
-
-import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -24,25 +22,25 @@ import butterknife.InjectView;
 public class GVAdapter extends BaseAdapter {
 
 
-    private final Context context;
-    private final List<FenQuBean.DataBean.NewBean> newBeen;
-    private FenQuBean.DataBean.NewBean newBean;
+    private final FenQuBean.DataBean dataBean;
+    private Context context;
 
 
-    public GVAdapter(Context context, List<FenQuBean.DataBean.NewBean> newBeen) {
+
+    public GVAdapter(Context context, FenQuBean.DataBean dataBean) {
         this.context = context;
-        this.newBeen = newBeen;
-    }
 
+        this.dataBean = dataBean;
+    }
 
     @Override
     public int getCount() {
-        return newBeen.size();
+        return dataBean.getBody().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return newBeen.get(position);
+        return dataBean.getBody().get(position);
     }
 
     @Override
@@ -52,31 +50,31 @@ public class GVAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder ;
+        ViewHolder viewHolder;
         if (convertView == null) {
-            convertView = View.inflate(context, R.layout.gv_item_1, null);
+            convertView = View.inflate(context, R.layout.grald_ooo, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
-        }else {
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        newBean = newBeen.get(position);
-        Log.e("TAG", "GVAdapte----------------r getView()"+newBean.getTitle());
-        Glide.with(context).load(newBean.getCover()).into(viewHolder.ivZfItetupian);
-        viewHolder.tvGengx.setText("评论："+newBean.getPlay());
-        viewHolder.tvNamezf.setText(newBean.getTitle());
+        viewHolder.textview0.setText(dataBean.getTitle());
+        viewHolder.textRenshu0.setText("" + dataBean.getBody().get(position).getPlay() + "");
+        Glide.with(context).load(dataBean.getBody().get(position).getCover()).transform(new CornersTransform(context)).into(viewHolder.ivGridview0);
+        viewHolder.textRenshu2.setText("" + dataBean.getBody().get(position).getPlay() + "");
         return convertView;
     }
 
-    static class ViewHolder {
-        @InjectView(R.id.iv_zf_itetupian)
-        ImageView ivZfItetupian;
-        @InjectView(R.id.tv_namezf)
-        TextView tvNamezf;
-        @InjectView(R.id.tv_gengx)
-        TextView tvGengx;
-
+    class ViewHolder {
+        @InjectView(R.id.iv_gridview_0)
+        ImageView ivGridview0;
+        @InjectView(R.id.textview_0)
+        TextView textview0;
+        @InjectView(R.id.text_renshu_0)
+        TextView textRenshu0;
+        @InjectView(R.id.text_renshu_2)
+        TextView textRenshu2;
         ViewHolder(View view) {
             ButterKnife.inject(this, view);
         }

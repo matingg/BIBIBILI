@@ -1,9 +1,8 @@
 package com.mashaoting.bibibili.recommend.fragment;
 
-import android.view.Gravity;
 import android.view.View;
-import android.widget.TextView;
 
+import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.base.BaseFragment;
 
 /**
@@ -13,18 +12,14 @@ import com.mashaoting.bibibili.base.BaseFragment;
  */
 
 public class DongTaiFragment extends BaseFragment {
-    TextView textView ;
+
     @Override
     public View initView() {
-        textView = new TextView(context);
-
-        textView.setTextSize(35);
-        textView.setGravity(Gravity.CENTER);
-        return textView;
+      View view = View.inflate(context , R.layout.dongtai ,null);
+        return view;
     }
 
     @Override
     public void initData() {
-        textView.setText("动态页面");
     }
 }

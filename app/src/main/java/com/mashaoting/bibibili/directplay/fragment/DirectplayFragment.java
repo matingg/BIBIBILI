@@ -32,6 +32,7 @@ public class DirectplayFragment extends BaseFragment {
     RecyclerView recylerview;
     @InjectView(R.id.demo_swiperefreshlayout)
     SwipeRefreshLayout demoSwiperefreshlayout;
+    private RecyLerViewAdapter adapter;
 
     @Override
     public View initView() {
@@ -51,13 +52,15 @@ public class DirectplayFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 Toast.makeText(context, "正在刷新", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
     }
 
 
-    private void londDatafromNet() {
+    public void londDatafromNet() {
 
 
         OkHttpUtils
@@ -79,7 +82,7 @@ public class DirectplayFragment extends BaseFragment {
                         Gson gson = new Gson();
                         directplayZBBean = gson.fromJson(response, DirectplayZBBean.class);
 
-                        RecyLerViewAdapter adapter = new RecyLerViewAdapter(context, directplayZBBean.getData());
+                        adapter = new RecyLerViewAdapter(context, directplayZBBean.getData());
                         recylerview.setAdapter(adapter);
 
 
