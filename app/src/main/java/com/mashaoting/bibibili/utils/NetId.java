@@ -25,4 +25,7 @@ public class NetId {
 
     public static final  String ZHUIFAN ="http://bangumi.bilibili.com/api/" +
             "app_index_page_v4?build=3940&device=phone&mobi_app=iphone&platform=ios";
+
+
+    public static  final  String FENQU = "http://app.bilibili.com/x/v2/region/show/child?appkey=1d8b6e7d45233436&build=501000&channel=bili&mobi_app=android&platform=android&rid=24&ts=1490024520000&sign=d07d88e8f92bea92106957a8d8267f0d";
 }

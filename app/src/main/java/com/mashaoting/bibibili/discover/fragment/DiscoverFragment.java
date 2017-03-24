@@ -72,14 +72,20 @@ public class DiscoverFragment extends BaseFragment {
                 nestedscrllview.setVisibility(View.VISIBLE);
                 tvMore.setVisibility(View.GONE);
                 tvMore2.setVisibility(View.VISIBLE);
-                initListener(faXianBean.getData().getList());
+                if(faXianBean != null) {
+                    initListener(faXianBean.getData().getList());
+                }
+
                 break;
             case R.id.tv_more2:
                 idFlowlayout1.setVisibility(View.VISIBLE);
                 nestedscrllview.setVisibility(View.GONE);
                 tvMore2.setVisibility(View.GONE);
                 tvMore.setVisibility(View.VISIBLE);
-                initListener(faXianBean.getData().getList());
+                if(faXianBean != null) {
+                    initListener(faXianBean.getData().getList());
+                }
+
                 break;
         }
 

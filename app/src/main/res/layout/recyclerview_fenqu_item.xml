@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:descendantFocusability="blocksDescendants"
               android:layout_height="match_parent"
               android:orientation="vertical">
 
 
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recylerview"
+        <com.mashaoting.bibibili.directplay.fragment.MyGridView
+            android:id="@+id/gv_fenqupf"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:numColumns="2"></com.mashaoting.bibibili.directplay.fragment.MyGridView>
 
 </LinearLayout>

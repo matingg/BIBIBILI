@@ -44,8 +44,7 @@ public class MainActivity extends BaseoActivity {
     ImageView titleIvDefaultAvatar;
     @InjectView(R.id.title_left_menu)
     LinearLayout titleLeftMenu;
-    @InjectView(R.id.title_iv_search)
-    ImageView titleIvSearch;
+
     @InjectView(R.id.title_iv_right_menu)
     ImageView titleIvRightMenu;
     @InjectView(R.id.id_drawerlayout)

@@ -54,6 +54,7 @@ public class GridViewAdapter extends BaseAdapter {
             convertView = View.inflate(context, R.layout.gridview_item, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
+
         }
         viewHolder = (ViewHolder) convertView.getTag();
         partitionsBean = dataBean.get(position);

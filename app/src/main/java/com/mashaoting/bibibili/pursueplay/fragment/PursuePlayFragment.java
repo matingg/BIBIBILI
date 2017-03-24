@@ -68,19 +68,19 @@ public class PursuePlayFragment extends BaseFragment {
                         ZHRecyclerViewAdapter adapter = new ZHRecyclerViewAdapter(context , result);
                         myRecyclerView.setAdapter(adapter);
 
-                        GridLayoutManager gridLayoutManager =  new GridLayoutManager(context,3);
+                        GridLayoutManager gridLayoutManager =  new GridLayoutManager(context,1);
                         myRecyclerView.setLayoutManager(gridLayoutManager);
                         //设置布局管理器    当position == 1 时  返回 三个格子  否则 占 一个
-                        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+                     //   gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
 
-                            @Override
-                            public int getSpanSize(int position) {
-                                if (position == 1) {
-                                    return 3;
-                                }
-                                    return 1 ;
-                            }
-                        });
+                         //   @Override
+                        //    public int getSpanSize(int position) {
+                              //  if (position == 1) {
+                                   // return 3;
+                              //  }
+                               //     return 1 ;
+                          //  }
+                     //   });
 
 
                     }

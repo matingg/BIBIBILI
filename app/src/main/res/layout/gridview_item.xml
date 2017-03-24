@@ -12,6 +12,7 @@
         android:id="@+id/iv_gridview"
         android:layout_width="match_parent"
         android:layout_height="120dp"
+        android:background="@drawable/no_banner"
         android:scaleType="fitXY"
         android:src="@drawable/ic_pay_bangumi_option_4"/>
 
