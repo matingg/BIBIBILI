@@ -1,7 +1,5 @@
 package com.mashaoting.bibibili.utils;
 
-import android.util.Log;
-
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -28,9 +26,9 @@ public class LoadNet {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.e("TAG", "LoadNet ++++++++++++++++++ getDataPost()");
-                Log.e("TAG", "LoadNet onSuccess()"+error);
-                Log.e("TAG", "LoadNet ++++++++++++++++++ getDataPost()");
+               if(http != null) {
+
+               }
             }
         });
     }

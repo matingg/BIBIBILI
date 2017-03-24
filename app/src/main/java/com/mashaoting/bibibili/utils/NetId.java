@@ -22,4 +22,7 @@ public class NetId {
             "1d8b6e7d45233436&build=501000&idx=1490013261&mobi_app=android&network" +
             "=wifi&platform=android&pull=true&style=2&ts=1490015599000&sign=" +
             "af4edc66aef7e443c98c28de2b660aa4";
+
+    public static final  String ZHUIFAN ="http://bangumi.bilibili.com/api/" +
+            "app_index_page_v4?build=3940&device=phone&mobi_app=iphone&platform=ios";
 }

@@ -88,13 +88,7 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
         } else if (position == ACT) {  //活动
             currentType = ACT;
         }
-//        else if (position == SECKILL) {  // 秒杀
-//            currentType = SECKILL;
-//        } else if (position == RECOMMEND) {  //推荐
-//            currentType = RECOMMEND;
-//        } else if (position == HOT) {  //热卖
-//            currentType = HOT;
-//        }
+
         return currentType; //当前类型
     }
 
