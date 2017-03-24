@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.directplay.bean.DirectplayZBBean;
 
@@ -62,8 +63,18 @@ public class GridViewAdapter extends BaseAdapter {
         viewHolder.tvGridviewBiaoti.setText(partitionsBean.getLives().get(position).getTitle());
         viewHolder.tvName.setText(partitionsBean.getLives().get(position).getOwner().getName());
         viewHolder.guanzhonggeshu.setText(""+partitionsBean.getLives().get(position).getRoom_id()+"");
-        Glide.with(context).load(partitionsBean.getLives()
-                .get(position).getCover().getSrc()).into(viewHolder.ivGridview);
+//        Glide.with(context)
+//                .load(partitionsBean.getLives().get(position).getCover().getSrc())
+//                .asBitmap() //强制处理为bitmap
+//
+//                .into(viewHolder.ivGridview);
+
+        Glide.with(context).load(partitionsBean.getLives().get(position).getCover().getSrc()).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL)
+                .transform(new CornersTransform(context))
+//                .placeholder(R.drawable.ic_gf_default_photo)
+                .error(R.drawable.ic_header_activity_center)
+                .crossFade()
+                .into(viewHolder.ivGridview);
         return convertView;
     }
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.mashaoting.bibibili.R;
+import com.mashaoting.bibibili.directplay.dianjitiaozhuanyemian.CornersTransform;
 import com.mashaoting.bibibili.recommend.bean.ZongHeBean;
 import com.mashaoting.bibibili.utils.Utilstime;
 
@@ -70,7 +71,13 @@ public class ZHGridViewAdapter extends BaseAdapter {
         viewHolder.tvBiaoti.setText(dataBean.getTitle()); //标题
         viewHolder.tvLeixing.setText(dataBean.getTname());
         Log.e("TAG", "ZHGridViewAdapter getView()"+dataBean.getTname());
-        Glide.with(context).load(dataBean.getCover()).into(viewHolder.ivZongheItemTupian);
+//        Glide.with(context).load(dataBean.getCover()).into(viewHolder.ivZongheItemTupian);
+        Glide.with(context).load(dataBean.getCover())
+                .transform(new CornersTransform(context))
+                .placeholder(R.drawable.live_home_live_center)
+                .error(R.drawable.ic_header_activity_center)
+                .crossFade()
+                .into(viewHolder.ivZongheItemTupian);
         return convertView;
     }
 

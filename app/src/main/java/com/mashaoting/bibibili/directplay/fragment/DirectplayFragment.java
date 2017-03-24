@@ -1,8 +1,10 @@
 package com.mashaoting.bibibili.directplay.fragment;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.mashaoting.bibibili.R;
@@ -28,6 +30,8 @@ public class DirectplayFragment extends BaseFragment {
 
     @InjectView(R.id.recylerview)
     RecyclerView recylerview;
+    @InjectView(R.id.demo_swiperefreshlayout)
+    SwipeRefreshLayout demoSwiperefreshlayout;
 
     @Override
     public View initView() {
@@ -39,7 +43,19 @@ public class DirectplayFragment extends BaseFragment {
     @Override
     public void initData() {
         londDatafromNet();
+        initLIstenner();
     }
+
+    private void initLIstenner() {
+        demoSwiperefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(context, "正在刷新", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 
     private void londDatafromNet() {
 
@@ -83,4 +99,6 @@ public class DirectplayFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.reset(this);
     }
+
+
 }
