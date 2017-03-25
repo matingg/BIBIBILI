@@ -1,6 +1,7 @@
 package com.mashaoting.bibibili.pursueplay.fragment;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.mashaoting.bibibili.R;
@@ -45,6 +47,8 @@ public class PursuePlayFragment extends BaseFragment {
     TextView tvSuoyin;
     @InjectView(R.id.look_tuijian)
     ImageView lookTuijian;
+    @InjectView(R.id.swipe_refresh_widget)
+    SwipeRefreshLayout swipeRefreshWidget;
 
     @Override
     public View initView() {
@@ -57,8 +61,27 @@ public class PursuePlayFragment extends BaseFragment {
     public void initData() {
 
         getDatafromNet();
+        initListener();
+    }
+
+    private void initListener() {
+
+        swipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+//                true是加载更多 还是刷新
+                if (true) {
+                    getDatafromNet() ;
+                    Toast.makeText(context, "下拉刷新  onRefresh()", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "上拉加载", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
+
 
     private void getDatafromNet() {
         OkHttpUtils
@@ -72,7 +95,7 @@ public class PursuePlayFragment extends BaseFragment {
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        swipeRefreshWidget.setRefreshing(false);
                     }
 
                     @Override
@@ -83,20 +106,20 @@ public class PursuePlayFragment extends BaseFragment {
 
                         ZHRecyclerViewAdapter adapter = new ZHRecyclerViewAdapter(context, result);
                         myRecyclerView.setAdapter(adapter);
-
+                        swipeRefreshWidget.setRefreshing(false);
                         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 1);
                         myRecyclerView.setLayoutManager(gridLayoutManager);
 //                        设置布局管理器    当position == 1 时  返回 三个格子  否则 占 一个
-                        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-
-                            @Override
-                            public int getSpanSize(int position) {
-                                if (position == 4) {
-                                    return 3;
-                                }
-                                return 1;
-                            }
-                        });
+//                        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//
+//                            @Override
+//                            public int getSpanSize(int position) {
+//                                if (position == 4) {
+//                                    return 3;
+//                                }
+//                                return 1;
+//                            }
+//                        });
 
 
                     }

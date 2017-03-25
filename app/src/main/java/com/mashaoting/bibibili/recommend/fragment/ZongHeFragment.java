@@ -1,7 +1,12 @@
 package com.mashaoting.bibibili.recommend.fragment;
 
+import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.mashaoting.bibibili.R;
@@ -26,6 +31,8 @@ public class ZongHeFragment extends BaseFragment {
 
     @InjectView(R.id.gv_zonghe)
     GridView gvZonghe;
+    @InjectView(R.id.swipe_refresh_widget)
+    SwipeRefreshLayout swipeRefreshWidget;
 
     @Override
     public View initView() {
@@ -36,8 +43,27 @@ public class ZongHeFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        loadNetFromNet();
 
+        loadNetFromNet();
+        initListener();
+
+    }
+
+    private void initListener() {
+
+        swipeRefreshWidget.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+//                true是加载更多 还是刷新
+                if (true) {
+                    loadNetFromNet();
+                    Toast.makeText(context, "下拉刷新  onRefresh()", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "上拉加载", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
     }
 
@@ -53,16 +79,17 @@ public class ZongHeFragment extends BaseFragment {
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        swipeRefreshWidget.setRefreshing(false);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         ZongHeBean zongHeBean = JSON.parseObject(response, ZongHeBean.class);
 
-                        ZHGridViewAdapter adapter = new ZHGridViewAdapter(context ,zongHeBean.getData());
+                        ZHGridViewAdapter adapter = new ZHGridViewAdapter(context, zongHeBean.getData());
 
                         gvZonghe.setAdapter(adapter);
+                        swipeRefreshWidget.setRefreshing(false);
                     }
                 });
     }
@@ -72,5 +99,13 @@ public class ZongHeFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.inject(this, rootView);
+        return rootView;
     }
 }

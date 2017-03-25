@@ -48,12 +48,18 @@ public class DirectplayFragment extends BaseFragment {
     }
 
     private void initLIstenner() {
+
         demoSwiperefreshlayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(context, "正在刷新", Toast.LENGTH_SHORT).show();
 
-
+//                true是加载更多 还是刷新
+                if (true) {
+                    londDatafromNet();
+                    Toast.makeText(context, "下拉刷新  onRefresh()", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "上拉加载", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -74,7 +80,7 @@ public class DirectplayFragment extends BaseFragment {
 
                     @Override
                     public void onError(Call call, Exception e, int id) {
-
+                        demoSwiperefreshlayout.setRefreshing(false);
                     }
 
                     @Override
@@ -82,13 +88,17 @@ public class DirectplayFragment extends BaseFragment {
                         Gson gson = new Gson();
                         directplayZBBean = gson.fromJson(response, DirectplayZBBean.class);
 
-                        adapter = new RecyLerViewAdapter(context, directplayZBBean.getData());
-                        recylerview.setAdapter(adapter);
+                        if(adapter == null) {
+                            adapter = new RecyLerViewAdapter(context, directplayZBBean.getData());
+                            recylerview.setAdapter(adapter);
+                            recylerview.setLayoutManager(new GridLayoutManager(context, 1));
 
+                            demoSwiperefreshlayout.setRefreshing(false);
+                        }else {
+                            adapter.refreshAdapter(directplayZBBean.getData());
+                            demoSwiperefreshlayout.setRefreshing(false);
+                        }
 
-                        //布局管理器有问题  最左边充不满
-//                        recylerview.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
-                        recylerview.setLayoutManager(new GridLayoutManager(context, 1));
 
                     }
 

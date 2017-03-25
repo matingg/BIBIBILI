@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/iv_gridview_0"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="140dp"
         android:background="@drawable/bangumi_follow_ic_index"
         android:scaleType="fitXY"
         />
@@ -15,8 +15,9 @@
     <TextView
         android:id="@+id/textview_0"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLength="2"
+        android:layout_height="20dp"
+        android:maxLines="2"
+
         android:text="标题"/>
 
 
@@ -28,8 +29,8 @@
         android:id="@+id/text_renshu_0"
         android:layout_weight="1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="光看人数"
+        android:layout_height="20dp"
+        android:text="观看人数"
         />
         <TextView
             android:id="@+id/text_renshu_2"

@@ -67,7 +67,7 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
     public int currentType = BANNER;
 
     private final Context context;
-    private final DirectplayZBBean.DataBean dataBean;
+    private DirectplayZBBean.DataBean dataBean;
     private final LayoutInflater inflater;
 
     public RecyLerViewAdapter(Context context, DirectplayZBBean.DataBean data) {
@@ -76,6 +76,13 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
         inflater = LayoutInflater.from(context);
 
     }
+
+    public void refreshAdapter(DirectplayZBBean.DataBean data) {
+
+        dataBean = data;
+        notifyDataSetChanged();
+    }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -132,6 +139,7 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return 3;
     }
+
 
 
     static class GridViewViewHolder extends RecyclerView.ViewHolder {

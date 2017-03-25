@@ -60,7 +60,7 @@ public class GVAdapter extends BaseAdapter {
         }
 
         viewHolder.textview0.setText(dataBean.getTitle());
-        viewHolder.textRenshu0.setText("" + dataBean.getBody().get(position).getPlay() + "");
+        viewHolder.textview0.setText(dataBean.getBody().get(position).getTitle());
         Glide.with(context).load(dataBean.getBody().get(position).getCover()).transform(new CornersTransform(context)).into(viewHolder.ivGridview0);
         viewHolder.textRenshu2.setText("" + dataBean.getBody().get(position).getPlay() + "");
         return convertView;

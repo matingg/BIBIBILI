@@ -30,7 +30,7 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
 
 
     private final Context context;
-    private final List<FenQuBean.DataBean> dataBeen;
+//    private final List<FenQuBean.DataBean> dataBeen;
 
     private static final int ASD0 = 0;
     private static final int ASD1 = 1;
@@ -52,10 +52,11 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
 
     private int CURRENTTYPE;
     private static List<String> imageUrls;
+    private List<FenQuBean.DataBean> dataBeen;
 
-    public FenQuRecyclerAdapter(Context context, List<FenQuBean.DataBean> data) {
+    public FenQuRecyclerAdapter(Context context,List<FenQuBean.DataBean> dataBeen) {
         this.context = context;
-        dataBeen = data;
+        this.dataBeen =dataBeen ;
     }
 
     @Override
@@ -100,98 +101,156 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if(  dataBeen.size()>0) {
 
-        if (viewType == ASD0) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
 
-        } else if (viewType == ASD1) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
+            if (viewType == ASD0) {
+                View view = View.inflate(context, R.layout.gridview, null);
+                return new ViewHolder0(context, view);
 
-        } else if (viewType == ASD2) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
+            } else if (viewType == ASD1) {
+                View view = View.inflate(context, R.layout.gridview, null);
+                return new ViewHolder0(context, view);
 
-        } else if (viewType == ASD3) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
+            } else if (viewType == ASD2) {
+                View view = View.inflate(context, R.layout.gridview, null);
+                return new ViewHolder0(context, view);
 
-        }else if (viewType == ASD4) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        } else if (viewType == ASD5) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        } else if (viewType == ASD6) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        }else if (viewType == ASD7) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        } else if (viewType == ASD8) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        } else if (viewType == ASD9) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        }else if (viewType == ASD10) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        } else if (viewType == ASD11) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        } else if (viewType == ASD12) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        }else if (viewType == ASD13) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        } else if (viewType == ASD14) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
-        } else if (viewType == ASD15) {
-            View view = View.inflate(context, R.layout.gridview, null);
-            return new ViewHolder0(context, view);
-
+            }
+// else if (viewType == ASD3) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        }
+//        else if (viewType == ASD4) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        }
+//             else if (viewType == ASD6) {
+//            View view = View.inflate(context, R.layout.gridview5, null);
+//            return new ViewHolder0(context, view);
+////
+//        } else if (viewType == ASD5) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD7) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD8) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD9) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD10) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD11) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD12) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD13) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD14) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        } else if (viewType == ASD15) {
+//            View view = View.inflate(context, R.layout.gridview, null);
+//            return new ViewHolder0(context, view);
+//
+//        }
         }
-
         return null;
+
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+
         if (position == ASD0) {
+
             ViewHolder0 viewholder0 = (ViewHolder0) holder;
             viewholder0.setData(dataBeen.get(0));
-        } else if (position == ASD1) {
+        }
+        else if (position == ASD1) {
             ViewHolder0 viewholder0 = (ViewHolder0) holder;
             viewholder0.setData(dataBeen.get(1));
-        } else if (position == ASD2) {
+        }
+        else if (position == ASD2) {
             ViewHolder0 viewholder0 = (ViewHolder0) holder;
             viewholder0.setData(dataBeen.get(2));
-        }else if(position == ASD3) {
-            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-            viewholder0.setData(dataBeen.get(3));
         }
+//        else if (position == ASD3) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(3));
+//        }
+//        else if (position == ASD4) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(4));
+//        }
+//        else if (position == ASD6) {
+//            ViewHolder5 viewholder5 = (ViewHolder5) holder;
+//            viewholder5.setData(context ,dataBeen.get(6));
+//        } else if (position == ASD5) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(5));
+//        } else if (position == ASD7) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(7));
+//        } else if (position == ASD8) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(8));
+//        } else if (position == ASD9) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(9));
+//        } else if (position == ASD10) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(10));
+//        } else if (position == ASD11) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(11));
+//        } else if (position == ASD12) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(12));
+//        } else if (position == ASD13) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(13));
+//        } else if (position == ASD14) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(14));
+//        } else if (position == ASD15) {
+//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
+//            viewholder0.setData(dataBeen.get(15));
+//        }
 
 
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return 3;
+    }
+
+    public void refreshAdapter(List<FenQuBean.DataBean> data) {
+        imageUrls.clear();
+        dataBeen.clear();
+
+        dataBeen.addAll(data) ;
+        notifyDataSetChanged();
     }
 
     static class ViewHolder0 extends RecyclerView.ViewHolder {
@@ -217,47 +276,47 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(FenQuBean.DataBean dataBean) {
-            if(dataBean.getParam() != null) {
                 GVAdapter adapter = new GVAdapter(context, dataBean);
                 gridviewrecyl.setAdapter(adapter);
                 shenmequ.setText(dataBean.getTitle());
-            }else {
-                gridviewrecyl.setVisibility(View.GONE);
-            }
-            if (dataBean.getBanner() != null) {
-                int a = 1 ;
-                if(dataBean.getBanner().getBottom().size() < 2) {
-                    a= 1 ;
-                }else {
-                    a = dataBean.getBanner().getBottom().size();
-                }
+
+                gengduo.setText("更多"+ dataBean.getTitle());
+
+
+            if(dataBean.getBanner() != null) {
+
                 //准备图片集合
                 imageUrls = new ArrayList<>();
-                for (int i = 0; i < a; i++) {
+                for (int i = 0; i < dataBean.getBanner().getBottom().size(); i++) {
+
                     imageUrls.add(dataBean.getBanner().getBottom().get(i).getImage());
                 }
+                //简单使用
+                banner.setImages(imageUrls)
+                        .setImageLoader(new ImageLoader() {
+                            @Override
+                            public void displayImage(Context context, Object path, ImageView imageView) {
 
-            } else {
+                                Glide.with(context)
+                                        .load(path)
+                                        .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                                        .crossFade()
+                                        .into(imageView);
+                            }
+                        }).start();
+
+                //设置动画效果-手风琴效果
+                banner.setBannerAnimation(AccordionTransformer.class);
+            }else {
                 banner.setVisibility(View.GONE);
             }
-            //简单使用
-            banner.setImages(imageUrls)
-                    .setImageLoader(new ImageLoader() {
-                        @Override
-                        public void displayImage(Context context, Object path, ImageView imageView) {
 
-                            Glide.with(context)
-                                    .load(path)
-                                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                                    .crossFade()
-                                    .into(imageView);
-                        }
-                    }).start();
 
-            //设置动画效果-手风琴效果
-            banner.setBannerAnimation(AccordionTransformer.class);
 
 
         }
+
+
     }
+
 }

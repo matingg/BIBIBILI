@@ -34,7 +34,7 @@
         android:id="@+id/gridviewrecyl"
         android:padding="2dp"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="370dp"
         android:numColumns="2"
         ></GridView>
 
