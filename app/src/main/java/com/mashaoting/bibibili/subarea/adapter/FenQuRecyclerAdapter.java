@@ -54,9 +54,10 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
     private static List<String> imageUrls;
     private List<FenQuBean.DataBean> dataBeen;
 
-    public FenQuRecyclerAdapter(Context context,List<FenQuBean.DataBean> dataBeen) {
+
+    public FenQuRecyclerAdapter(Context context, List<FenQuBean.DataBean> data) {
         this.context = context;
-        this.dataBeen =dataBeen ;
+        dataBeen = data;
     }
 
     @Override
@@ -68,40 +69,41 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
             CURRENTTYPE = ASD1;
         } else if (position == ASD2) {
             CURRENTTYPE = ASD2;
-        } else if (position == ASD3) {
-            CURRENTTYPE = ASD3;
-        } else if (position == ASD4) {
-            CURRENTTYPE = ASD4;
-        } else if (position == ASD5) {
-            CURRENTTYPE = ASD5;
-        } else if (position == ASD6) {
-            CURRENTTYPE = ASD6;
-        } else if (position == ASD7) {
-            CURRENTTYPE = ASD7;
-        } else if (position == ASD8) {
-            CURRENTTYPE = ASD8;
-        } else if (position == ASD9) {
-            CURRENTTYPE = ASD9;
-        } else if (position == ASD10) {
-            CURRENTTYPE = ASD10;
-        } else if (position == ASD11) {
-            CURRENTTYPE = ASD11;
-        } else if (position == ASD12) {
-            CURRENTTYPE = ASD12;
-        } else if (position == ASD13) {
-            CURRENTTYPE = ASD13;
-        } else if (position == ASD14) {
-            CURRENTTYPE = ASD14;
-        } else if (position == ASD15) {
-            CURRENTTYPE = ASD15;
         }
+//        else if (position == ASD3) {
+//            CURRENTTYPE = ASD3;
+//        } else if (position == ASD4) {
+//            CURRENTTYPE = ASD4;
+//        } else if (position == ASD5) {
+//            CURRENTTYPE = ASD5;
+//        } else if (position == ASD6) {
+//            CURRENTTYPE = ASD6;
+//        } else if (position == ASD7) {
+//            CURRENTTYPE = ASD7;
+//        } else if (position == ASD8) {
+//            CURRENTTYPE = ASD8;
+//        } else if (position == ASD9) {
+//            CURRENTTYPE = ASD9;
+//        } else if (position == ASD10) {
+//            CURRENTTYPE = ASD10;
+//        } else if (position == ASD11) {
+//            CURRENTTYPE = ASD11;
+//        } else if (position == ASD12) {
+//            CURRENTTYPE = ASD12;
+//        } else if (position == ASD13) {
+//            CURRENTTYPE = ASD13;
+//        } else if (position == ASD14) {
+//            CURRENTTYPE = ASD14;
+//        } else if (position == ASD15) {
+//            CURRENTTYPE = ASD15;
+//        }
 
         return CURRENTTYPE;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if(  dataBeen.size()>0) {
+        if (dataBeen.size() != 0) {
 
 
             if (viewType == ASD0) {
@@ -185,12 +187,10 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
 
             ViewHolder0 viewholder0 = (ViewHolder0) holder;
             viewholder0.setData(dataBeen.get(0));
-        }
-        else if (position == ASD1) {
+        } else if (position == ASD1) {
             ViewHolder0 viewholder0 = (ViewHolder0) holder;
             viewholder0.setData(dataBeen.get(1));
-        }
-        else if (position == ASD2) {
+        } else if (position == ASD2) {
             ViewHolder0 viewholder0 = (ViewHolder0) holder;
             viewholder0.setData(dataBeen.get(2));
         }
@@ -249,7 +249,7 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
         imageUrls.clear();
         dataBeen.clear();
 
-        dataBeen.addAll(data) ;
+        dataBeen.addAll(data);
         notifyDataSetChanged();
     }
 
@@ -276,14 +276,14 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(FenQuBean.DataBean dataBean) {
-                GVAdapter adapter = new GVAdapter(context, dataBean);
-                gridviewrecyl.setAdapter(adapter);
-                shenmequ.setText(dataBean.getTitle());
+            GVAdapter adapter = new GVAdapter(context, dataBean);
+            gridviewrecyl.setAdapter(adapter);
+            shenmequ.setText(dataBean.getTitle());
 
-                gengduo.setText("更多"+ dataBean.getTitle());
+            gengduo.setText("更多" + dataBean.getTitle());
 
 
-            if(dataBean.getBanner() != null) {
+            if (dataBean.getBanner() != null) {
 
                 //准备图片集合
                 imageUrls = new ArrayList<>();
@@ -307,11 +307,9 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
 
                 //设置动画效果-手风琴效果
                 banner.setBannerAnimation(AccordionTransformer.class);
-            }else {
+            } else {
                 banner.setVisibility(View.GONE);
             }
-
-
 
 
         }

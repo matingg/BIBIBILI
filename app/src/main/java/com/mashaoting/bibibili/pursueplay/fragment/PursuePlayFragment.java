@@ -2,6 +2,7 @@ package com.mashaoting.bibibili.pursueplay.fragment;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,11 +50,14 @@ public class PursuePlayFragment extends BaseFragment {
     ImageView lookTuijian;
     @InjectView(R.id.swipe_refresh_widget)
     SwipeRefreshLayout swipeRefreshWidget;
+    @InjectView(R.id.cardView)
+    CardView cardView;
 
     @Override
     public View initView() {
         View view = View.inflate(context, R.layout.zhuifan, null);
         ButterKnife.inject(this, view);
+
         return view;
     }
 
@@ -72,7 +76,7 @@ public class PursuePlayFragment extends BaseFragment {
 
 //                true是加载更多 还是刷新
                 if (true) {
-                    getDatafromNet() ;
+                    getDatafromNet();
                     Toast.makeText(context, "下拉刷新  onRefresh()", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "上拉加载", Toast.LENGTH_SHORT).show();

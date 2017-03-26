@@ -1,6 +1,7 @@
 package com.mashaoting.bibibili.directplay.fragment;
 
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -32,12 +33,19 @@ public class DirectplayFragment extends BaseFragment {
     RecyclerView recylerview;
     @InjectView(R.id.demo_swiperefreshlayout)
     SwipeRefreshLayout demoSwiperefreshlayout;
+    @InjectView(R.id.cardView)
+    CardView cardView;
     private RecyLerViewAdapter adapter;
 
     @Override
     public View initView() {
         View view = View.inflate(context, R.layout.zhibobuju, null);
         ButterKnife.inject(this, view);
+        cardView.setRadius(20);//设置图片圆角的半径大小
+
+        cardView.setCardElevation(20);//设置阴影部分大小
+
+        cardView.setContentPadding(15,15,15,15);//设置图片距离阴影大小
         return view;
     }
 
@@ -88,13 +96,13 @@ public class DirectplayFragment extends BaseFragment {
                         Gson gson = new Gson();
                         directplayZBBean = gson.fromJson(response, DirectplayZBBean.class);
 
-                        if(adapter == null) {
+                        if (adapter == null) {
                             adapter = new RecyLerViewAdapter(context, directplayZBBean.getData());
                             recylerview.setAdapter(adapter);
                             recylerview.setLayoutManager(new GridLayoutManager(context, 1));
 
                             demoSwiperefreshlayout.setRefreshing(false);
-                        }else {
+                        } else {
                             adapter.refreshAdapter(directplayZBBean.getData());
                             demoSwiperefreshlayout.setRefreshing(false);
                         }
@@ -112,6 +120,7 @@ public class DirectplayFragment extends BaseFragment {
         super.onDestroyView();
         ButterKnife.reset(this);
     }
+
 
 
 }

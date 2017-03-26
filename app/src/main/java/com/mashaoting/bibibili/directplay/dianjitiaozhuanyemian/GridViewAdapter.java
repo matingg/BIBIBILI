@@ -1,6 +1,7 @@
 package com.mashaoting.bibibili.directplay.dianjitiaozhuanyemian;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,6 +25,7 @@ import butterknife.InjectView;
 public class GridViewAdapter extends BaseAdapter {
 
     private final List<DirectplayZBBean.DataBean.PartitionsBean> dataBean;
+
     private Context context;
     private DirectplayZBBean.DataBean.PartitionsBean partitionsBean;
 
@@ -50,7 +52,7 @@ public class GridViewAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder ;
+        ViewHolder viewHolder;
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.gridview_item, null);
             viewHolder = new ViewHolder(convertView);
@@ -62,16 +64,9 @@ public class GridViewAdapter extends BaseAdapter {
 
         viewHolder.tvGridviewBiaoti.setText(partitionsBean.getLives().get(position).getTitle());
         viewHolder.tvName.setText(partitionsBean.getLives().get(position).getOwner().getName());
-        viewHolder.guanzhonggeshu.setText(""+partitionsBean.getLives().get(position).getRoom_id()+"");
-//        Glide.with(context)
-//                .load(partitionsBean.getLives().get(position).getCover().getSrc())
-//                .asBitmap() //强制处理为bitmap
-//
-//                .into(viewHolder.ivGridview);
-
+        viewHolder.guanzhonggeshu.setText("" + partitionsBean.getLives().get(position).getRoom_id() + "");
         Glide.with(context).load(partitionsBean.getLives().get(position).getCover().getSrc()).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL)
                 .transform(new CornersTransform(context))
-//                .placeholder(R.drawable.ic_gf_default_photo)
                 .error(R.drawable.ic_header_activity_center)
                 .crossFade()
                 .into(viewHolder.ivGridview);
@@ -89,9 +84,15 @@ public class GridViewAdapter extends BaseAdapter {
         TextView tvName;
         @InjectView(R.id.guanzhonggeshu)
         TextView guanzhonggeshu;
-
+        @InjectView(R.id.cardView)
+        CardView cardView;
         ViewHolder(View view) {
             ButterKnife.inject(this, view);
+            cardView.setRadius(20);//设置图片圆角的半径大小
+
+            cardView.setCardElevation(20);//设置阴影部分大小
+
+            cardView.setContentPadding(15,15,15,15);//设置图片距离阴影大小
         }
     }
 }

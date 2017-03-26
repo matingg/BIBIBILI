@@ -1,6 +1,7 @@
 package com.mashaoting.bibibili.pursueplay.adapter;
 
 import android.content.Context;
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -24,6 +25,7 @@ public class ZFGridAdapter extends BaseAdapter {
 
     private final Context context;
     private final ZhuiFanBean.ResultBean resultBean;
+
     private ZhuiFanBean.ResultBean.PreviousBean.ListBean listBean;
 
 
@@ -63,7 +65,7 @@ public class ZFGridAdapter extends BaseAdapter {
         Glide.with(context).load(listBean.getCover()).into(viewHolder.ivZfItemTupian);
 
         viewHolder.tvNameZf.setText(listBean.getTitle());
-        viewHolder.tvGengxin.setText("更新至"+listBean.getNewest_ep_index()+"话");
+        viewHolder.tvGengxin.setText("更新至" + listBean.getNewest_ep_index() + "话");
         return convertView;
     }
 
@@ -78,9 +80,15 @@ public class ZFGridAdapter extends BaseAdapter {
         TextView tvNameZf;
         @InjectView(R.id.tv_gengxin)
         TextView tvGengxin;
-
+        @InjectView(R.id.cardView)
+        CardView cardView;
         ViewHolder(View view) {
             ButterKnife.inject(this, view);
+            cardView.setRadius(20);//设置图片圆角的半径大小
+
+            cardView.setCardElevation(20);//设置阴影部分大小
+
+            cardView.setContentPadding(15,15,15,15);//设置图片距离阴影大小
         }
     }
 }

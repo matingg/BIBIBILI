@@ -4,12 +4,17 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:padding="6dp"
         >
+
 
         <ImageView
             android:id="@+id/iv_zf_item_tupian"
@@ -38,8 +43,9 @@
 
 
         </LinearLayout>
-    </RelativeLayout>
 
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
     <TextView
         android:id="@+id/tv_name_zf"
         android:layout_width="match_parent"

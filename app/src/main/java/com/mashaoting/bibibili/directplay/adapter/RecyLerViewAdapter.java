@@ -184,6 +184,7 @@ static class SmiloTetleViewHolder extends RecyclerView.ViewHolder {
     SmiloTetleViewHolder(final Context context, View view) {
         super(view);
         ButterKnife.inject(this, view);
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -229,8 +230,6 @@ class BannerViewHolder extends RecyclerView.ViewHolder {
 
                         Glide.with(context)
                                 .load(path)
-//                                    .fitCenter()
-//                                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                                 .crossFade()
                                 .into(imageView);
                     }
@@ -247,6 +246,7 @@ class BannerViewHolder extends RecyclerView.ViewHolder {
                 Toast.makeText(context, "position" + position, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, BannerInfoActivity.class);
                 intent.putExtra("intent", bannerbean.get(0).getLink());
+                intent.putExtra("tilte" , bannerbean.get(0).getTitle());
                 context.startActivity(intent);
             }
         });
