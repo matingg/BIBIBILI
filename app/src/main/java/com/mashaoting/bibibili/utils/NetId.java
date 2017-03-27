@@ -28,4 +28,7 @@ public class NetId {
     public static final String FENQU = "http://app.bilibili.com/x/v2/show/region?appkey=1d8b6e7d45233436&build=501000&mobi_app=android&platform=android&ts=1490014674000&sign=93edb7634f38498a60e5c3ad0b8b0974";
 
     public static final String WELCOME = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1490362718169&di=b817ec23756dfbb00f47afaf24e6812d&imgtype=0&src=http%3A%2F%2Fm.qqzhi.com%2Fupload%2Fimg_2_3974563017D2520911955_23.jpg";
+
+    public  static  final  String FAXIANZHIZONGHE1 = "http://app.bilibili.com/x/v2/search?appkey=1d8b6e7d45233436&build=501000&duration=0&keyword=" ;
+    public  static  final  String FAXIANZHIZONGHE2 = "&mobi_app=android&platform=android&pn=1&ps=20" ;
 }

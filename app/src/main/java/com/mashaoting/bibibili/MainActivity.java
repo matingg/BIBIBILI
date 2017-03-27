@@ -128,6 +128,7 @@ public class MainActivity extends BaseoActivity {
             case R.id.title_left_menu:
                 break;
             case R.id.title_iv_right_menu2:
+
                 break;
             case R.id.title_iv_right_menu:
                 SearchFragment searchFragment = SearchFragment.newInstance();

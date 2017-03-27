@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 /**
  * Created by 麻少亭 on 2017/3/20.
@@ -26,6 +27,9 @@ public abstract class BaseFragment extends Fragment {
         context = getActivity();//MainActivity
     }
 
+    public void toast(String s){
+        Toast.makeText(context, s, Toast.LENGTH_SHORT).show();
+    }
 
     /**
      * 当创建时候的时候回调

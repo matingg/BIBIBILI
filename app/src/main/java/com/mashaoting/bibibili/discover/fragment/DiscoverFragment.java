@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.base.BaseFragment;
+import com.mashaoting.bibibili.discover.activity.TagFaXianActivity;
 import com.mashaoting.bibibili.discover.activity.XingQuQuanActivity;
 import com.mashaoting.bibibili.discover.bean.FaXianBean;
 import com.mashaoting.bibibili.utils.NetId;
@@ -130,6 +132,7 @@ public class DiscoverFragment extends BaseFragment {
 
 
                         if(faXianBean != null) {
+                            Log.e("TAG", "-----------------------------"+faXianBean.getData());
                             initText1();
                             inittext2();
                         }
@@ -189,21 +192,6 @@ public class DiscoverFragment extends BaseFragment {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void inittext2() {
         idFlowlayout.setAdapter(new TagAdapter<String>(stringList) {
 
@@ -226,6 +214,7 @@ public class DiscoverFragment extends BaseFragment {
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 Toast.makeText(getActivity(), stringList.get(position), Toast.LENGTH_SHORT).show();
                 //view.setVisibility(View.GONE);
+                tiaoZhuan(stringList.get(position));
                 return true;
             }
         });
@@ -237,6 +226,12 @@ public class DiscoverFragment extends BaseFragment {
                 getActivity().setTitle("choose:" + selectPosSet.toString());
             }
         });
+    }
+
+    private void tiaoZhuan(String s) {
+        Intent intent = new Intent(context , TagFaXianActivity.class);
+        intent.putExtra("id", s);
+        startActivity(intent);
     }
 
 
@@ -264,6 +259,7 @@ public class DiscoverFragment extends BaseFragment {
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 Toast.makeText(getActivity(), stringList.get(position), Toast.LENGTH_SHORT).show();
 //                            view.setVisibility(View.GONE);
+                tiaoZhuan(stringList.get(position));
                 return true;
             }
         });
