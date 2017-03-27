@@ -10,7 +10,7 @@
         android:layout_gravity="center_horizontal"
         app:indicator_height="5dp"
         app:indicator_width="5dp"
-        android:background="@drawable/no_banner"
+
         app:image_scale_type="fit_xy"
         android:layout_width="match_parent"
         android:layout_height="150dp"></com.youth.banner.Banner>

@@ -1,5 +1,6 @@
 package com.mashaoting.bibibili;
 
+import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -22,7 +23,10 @@ import com.mashaoting.bibibili.discover.fragment.DiscoverFragment;
 import com.mashaoting.bibibili.pursueplay.fragment.PursuePlayFragment;
 import com.mashaoting.bibibili.recommend.fragment.RecommendFragment;
 import com.mashaoting.bibibili.subarea.fragment.SubareaFragment;
+import com.wyt.searchbox.SearchFragment;
+import com.wyt.searchbox.custom.IOnSearchClickListener;
 
+import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
 
@@ -54,6 +58,8 @@ public class MainActivity extends BaseoActivity {
     RelativeLayout rlZuobuju;
     @InjectView(R.id.lv_main_0)
     ListView lvMain0;
+    @InjectView(R.id.title_iv_right_menu2)
+    ImageView titleIvRightMenu2;
 
 
     @Override
@@ -89,14 +95,14 @@ public class MainActivity extends BaseoActivity {
     @Override
     protected void initListener() {
 
-        View view = View.inflate(this , R.layout.zuo_title , null);
+        View view = View.inflate(this, R.layout.zuo_title, null);
         LisViewAdapter adapter = new LisViewAdapter(this);
         lvMain0.addHeaderView(view);
         lvMain0.setAdapter(adapter);
         lvMain0.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "被点击了"+parent.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "被点击了" + parent.toString(), Toast.LENGTH_SHORT).show();
                 idDrawerlayout.closeDrawers();
             }
         });
@@ -105,12 +111,35 @@ public class MainActivity extends BaseoActivity {
     }
 
 
-    @OnClick(R.id.iv_title)
-    public void onClick() {
-        Toast.makeText(MainActivity.this, "0", Toast.LENGTH_SHORT).show();
-        idDrawerlayout.openDrawer(rlZuobuju);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.inject(this);
     }
 
 
-
+    @OnClick({R.id.iv_title, R.id.title_left_menu, R.id.title_iv_right_menu2, R.id.title_iv_right_menu})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_title:
+                idDrawerlayout.openDrawer(rlZuobuju);
+                break;
+            case R.id.title_left_menu:
+                break;
+            case R.id.title_iv_right_menu2:
+                break;
+            case R.id.title_iv_right_menu:
+                SearchFragment searchFragment = SearchFragment.newInstance();
+                searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
+                    @Override
+                    public void OnSearchClick(String keyword) {
+                        //这里处理逻辑
+                        Toast.makeText(MainActivity.this, keyword, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                searchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);
+                break;
+        }
+    }
 }

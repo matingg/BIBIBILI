@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.mashaoting.bibibili.R;
@@ -75,8 +76,15 @@ public class GVAdapter extends BaseAdapter {
         TextView textRenshu0;
         @InjectView(R.id.text_renshu_2)
         TextView textRenshu2;
-        ViewHolder(View view) {
+        ViewHolder(final View view) {
             ButterKnife.inject(this, view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context , ""+textview0.getText(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }

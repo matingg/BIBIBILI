@@ -3,7 +3,7 @@
                                             xmlns:zhy="http://schemas.android.com/apk/res-auto"
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
-                                            android:background="#44ffffff"
+                                            android:background="#fff"
                                             android:orientation="vertical"
                                             android:padding="8dp">
 
@@ -16,8 +16,7 @@
             android:id="@+id/tv_sousu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
-            android:drawableLeft="@drawable/ic_hint_search"
+           android:drawableLeft="@drawable/ic_hint_search"
             android:drawablePadding="15dp"
             android:drawableRight="@drawable/ic_hint_search"
             android:gravity="center_vertical"
@@ -34,7 +33,7 @@
 
         <com.zhy.view.flowlayout.TagFlowLayout
             android:id="@+id/id_flowlayout1"
-
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="fill_parent"
             android:layout_height="112dp"
             android:padding="5dp"
@@ -51,6 +50,7 @@
             <com.zhy.view.flowlayout.TagFlowLayout
                 android:id="@+id/id_flowlayout"
                 android:layout_width="fill_parent"
+                android:background="?android:attr/selectableItemBackground"
                 android:layout_height="match_parent"
                 android:padding="5dp"
                 zhy:max_select="-1"
@@ -62,6 +62,7 @@
 
         <TextView
             android:id="@+id/tv_more"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -78,9 +79,11 @@
             android:visibility="gone"/>
 
         <TextView
+            android:id="@+id/xingququan0"
             android:layout_width="match_parent"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_height="wrap_content"
-            android:background="#fff"
+
             android:drawableLeft="@drawable/ic_head_live"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
@@ -90,14 +93,17 @@
             android:textSize="18sp"/>
 
         <ImageView
+
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#33000000"/>
 
         <TextView
+            android:id="@+id/huati1"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="?android:attr/selectableItemBackground"
             android:drawableLeft="@drawable/ic_head_live"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
@@ -110,10 +116,12 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#33000000"/>
+
         <TextView
+            android:id="@+id/huodong2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="?android:attr/selectableItemBackground"
             android:drawableLeft="@drawable/ic_head_live"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
@@ -126,10 +134,12 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#33000000"/>
+
         <TextView
+            android:id="@+id/xiaoheiwu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="?android:attr/selectableItemBackground"
             android:drawableLeft="@drawable/ic_head_live"
             android:drawablePadding="12dp"
             android:gravity="center_vertical"
@@ -142,26 +152,30 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:background="#05000000"/>
+
         <TextView
+            android:id="@+id/yuanchuang"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
             android:drawableLeft="@drawable/ic_head_live"
             android:drawablePadding="12dp"
             android:gravity="center_vertical"
             android:padding="5dp"
             android:paddingLeft="10dp"
             android:text="原创排行榜"
+            android:background="?android:attr/selectableItemBackground"
             android:textSize="18sp"/>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#33000000"/>
+
         <TextView
+            android:id="@+id/quanqu"
+            android:background="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
             android:drawableLeft="@drawable/ic_head_live"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
@@ -174,6 +188,7 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:background="#05000000"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -190,10 +205,11 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:background="#33000000"/>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#fff"
+            android:background="?android:attr/selectableItemBackground"
             android:drawableLeft="@drawable/ic_head_live"
             android:drawablePadding="10dp"
             android:gravity="center_vertical"
@@ -202,7 +218,6 @@
             android:text="周边商城"
             android:textSize="18sp"/>
 
-       
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

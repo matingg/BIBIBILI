@@ -67,8 +67,12 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
     public int currentType = BANNER;
 
     private final Context context;
+
+
+
     private DirectplayZBBean.DataBean dataBean;
     private final LayoutInflater inflater;
+
 
     public RecyLerViewAdapter(Context context, DirectplayZBBean.DataBean data) {
         this.context = context;
@@ -141,7 +145,6 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
     }
 
 
-
     static class GridViewViewHolder extends RecyclerView.ViewHolder {
         private final Context context;
         @InjectView(R.id.gridview)
@@ -162,96 +165,124 @@ public class RecyLerViewAdapter extends RecyclerView.Adapter {
     }
 
 
-
-
+    //-------------------------------------------------------------------------------------------------------------
 //-------------------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------------------------
-static class SmiloTetleViewHolder extends RecyclerView.ViewHolder {
-    @InjectView(R.id.tva1)
-    TextView tva1;
-    @InjectView(R.id.tva2)
-    TextView tva2;
+    static class SmiloTetleViewHolder extends RecyclerView.ViewHolder {
+//        @InjectView(R.id.edittext)
+//        EditText edittext;
+        @InjectView(R.id.tv_zhuanqu)
+        TextView zhuangqu;
+        @InjectView(R.id.zhibogeshu)
+        TextView zhibogeshu;
+        private Context context;
+//        @InjectView(R.id.textinputlayout)
+//        TextInputLayout textinputlayout;
 
-    @InjectView(R.id.tva4)
-    TextView tva4;
-    @InjectView(R.id.tva5)
-    TextView tva5;
-    @InjectView(R.id.tv_zhuanqu)
-    TextView zhuangqu;
-    @InjectView(R.id.zhibogeshu)
-    TextView zhibogeshu;
+        SmiloTetleViewHolder(final Context context, View view) {
+            super(view);
+            ButterKnife.inject(this, view);
+//            final TextInputLayout usernameWrapper = (TextInputLayout) findViewById(R.id.usernameWrapper);
+//            final TextInputLayout passwordWrapper = (TextInputLayout) findViewById(R.id.passwordWrapper);
+            this.context = context;
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "view", Toast.LENGTH_SHORT).show();
+                }
+            });
 
-    SmiloTetleViewHolder(final Context context, View view) {
-        super(view);
-        ButterKnife.inject(this, view);
+//            edittext.addTextChangedListener(new TextWatcher() {
+//                @Override
+//                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//                }
+//
+//                @Override
+//                public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+//                }
+//
+//                @Override
+//                public void afterTextChanged(Editable s) {
+//                    if (s.length() > 5) {
+//                        //设置错误提示信息
+////                        textinputlayout.setError("不能超过5个");
+//                        //启用错误提示
+////                        textinputlayout.setErrorEnabled(true);
+//                    } else {
+//                        //关闭错误提示
+////                        textinputlayout.setErrorEnabled(false);
+//                    }
+//                }
+//            });
+        }
 
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "view", Toast.LENGTH_SHORT).show();
-            }
-        });
+        public void setData(DirectplayZBBean.DataBean.PartitionsBean.PartitionBean name) {
+            zhuangqu.setText(name.getName());
+            zhibogeshu.setText("有" + name.getCount() + "在直播");
+        }
+
+
     }
-
-    public void setData(DirectplayZBBean.DataBean.PartitionsBean.PartitionBean name) {
-        zhuangqu.setText(name.getName());
-        zhibogeshu.setText("有" + name.getCount() + "在直播");
-    }
-}
 
 
 //----------------------------------------------------------------------------------------------------------------
 
-//            banner   横幅
-class BannerViewHolder extends RecyclerView.ViewHolder {
-    private final Context context;
-    @InjectView(R.id.banner)
-    Banner banner;
+    //            banner   横幅
+    class BannerViewHolder extends RecyclerView.ViewHolder {
+        private final Context context;
+        @InjectView(R.id.banner)
+        Banner banner;
 
-    BannerViewHolder(Context context, View view) {
-        super(view);
-        ButterKnife.inject(this, view);
-        this.context = context;
-    }
-
-
-    public void setData(final List<DirectplayZBBean.DataBean.BannerBean> bannerbean) {
-        //准备图片集合
-        List<String> imageUrls = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
-            imageUrls.add(bannerbean.get(0).getImg());
+        BannerViewHolder(Context context, View view) {
+            super(view);
+            ButterKnife.inject(this, view);
+            this.context = context;
         }
 
-        //简单使用
-        banner.setImages(imageUrls)
-                .setImageLoader(new ImageLoader() {
-                    @Override
-                    public void displayImage(Context context, Object path, ImageView imageView) {
 
-                        Glide.with(context)
-                                .load(path)
-                                .crossFade()
-                                .into(imageView);
-                    }
-                }).start();
-
-        //设置动画效果-手风琴效果
-        banner.setBannerAnimation(AccordionTransformer.class);
-
-
-        //设置点击事件
-        banner.setOnBannerListener(new OnBannerListener() {
-            @Override
-            public void OnBannerClick(int position) {
-                Toast.makeText(context, "position" + position, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, BannerInfoActivity.class);
-                intent.putExtra("intent", bannerbean.get(0).getLink());
-                intent.putExtra("tilte" , bannerbean.get(0).getTitle());
-                context.startActivity(intent);
+        public void setData(final List<DirectplayZBBean.DataBean.BannerBean> bannerbean) {
+            //准备图片集合
+            List<String> imageUrls = new ArrayList<>();
+            for (int i = 0; i < 2; i++) {
+                imageUrls.add(bannerbean.get(0).getImg());
             }
-        });
+
+            //简单使用
+            banner.setImages(imageUrls)
+                    .setImageLoader(new ImageLoader() {
+                        @Override
+                        public void displayImage(Context context, Object path, ImageView imageView) {
+
+                            Glide.with(context)
+                                    .load(path)
+                                    .crossFade()
+                                    .into(imageView);
+                        }
+                    }).start();
+
+            //设置动画效果-手风琴效果
+            banner.setBannerAnimation(AccordionTransformer.class);
+
+
+            //设置点击事件
+            banner.setOnBannerListener(new OnBannerListener() {
+                @Override
+                public void OnBannerClick(int position) {
+                    Toast.makeText(context, "position" + position, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, BannerInfoActivity.class);
+                    intent.putExtra("intent", bannerbean.get(0).getLink());
+                    intent.putExtra("tilte", bannerbean.get(0).getTitle());
+                    context.startActivity(intent);
+                }
+            });
+        }
     }
-}
 
 
+    static class ViewHolder {
+        ViewHolder(View view) {
+            ButterKnife.inject(this, view);
+        }
+    }
 }

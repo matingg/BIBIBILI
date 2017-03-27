@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.subarea.bean.FenQuBean;
 import com.youth.banner.Banner;
+import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
 import com.youth.banner.transformer.AccordionTransformer;
 
@@ -35,19 +37,6 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
     private static final int ASD0 = 0;
     private static final int ASD1 = 1;
     private static final int ASD2 = 2;
-    private static final int ASD3 = 3;
-    private static final int ASD4 = 4;
-    private static final int ASD5 = 5;
-    private static final int ASD6 = 6;
-    private static final int ASD7 = 7;
-    private static final int ASD8 = 8;
-    private static final int ASD9 = 9;
-    private static final int ASD10 = 10;
-    private static final int ASD11 = 11;
-    private static final int ASD12 = 12;
-    private static final int ASD13 = 13;
-    private static final int ASD14 = 14;
-    private static final int ASD15 = 15;
 
 
     private int CURRENTTYPE;
@@ -70,33 +59,6 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
         } else if (position == ASD2) {
             CURRENTTYPE = ASD2;
         }
-//        else if (position == ASD3) {
-//            CURRENTTYPE = ASD3;
-//        } else if (position == ASD4) {
-//            CURRENTTYPE = ASD4;
-//        } else if (position == ASD5) {
-//            CURRENTTYPE = ASD5;
-//        } else if (position == ASD6) {
-//            CURRENTTYPE = ASD6;
-//        } else if (position == ASD7) {
-//            CURRENTTYPE = ASD7;
-//        } else if (position == ASD8) {
-//            CURRENTTYPE = ASD8;
-//        } else if (position == ASD9) {
-//            CURRENTTYPE = ASD9;
-//        } else if (position == ASD10) {
-//            CURRENTTYPE = ASD10;
-//        } else if (position == ASD11) {
-//            CURRENTTYPE = ASD11;
-//        } else if (position == ASD12) {
-//            CURRENTTYPE = ASD12;
-//        } else if (position == ASD13) {
-//            CURRENTTYPE = ASD13;
-//        } else if (position == ASD14) {
-//            CURRENTTYPE = ASD14;
-//        } else if (position == ASD15) {
-//            CURRENTTYPE = ASD15;
-//        }
 
         return CURRENTTYPE;
     }
@@ -119,61 +81,7 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
                 return new ViewHolder0(context, view);
 
             }
-// else if (viewType == ASD3) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        }
-//        else if (viewType == ASD4) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        }
-//             else if (viewType == ASD6) {
-//            View view = View.inflate(context, R.layout.gridview5, null);
-//            return new ViewHolder0(context, view);
-////
-//        } else if (viewType == ASD5) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD7) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD8) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD9) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD10) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD11) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD12) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD13) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD14) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        } else if (viewType == ASD15) {
-//            View view = View.inflate(context, R.layout.gridview, null);
-//            return new ViewHolder0(context, view);
-//
-//        }
+
         }
         return null;
 
@@ -194,48 +102,6 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
             ViewHolder0 viewholder0 = (ViewHolder0) holder;
             viewholder0.setData(dataBeen.get(2));
         }
-//        else if (position == ASD3) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(3));
-//        }
-//        else if (position == ASD4) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(4));
-//        }
-//        else if (position == ASD6) {
-//            ViewHolder5 viewholder5 = (ViewHolder5) holder;
-//            viewholder5.setData(context ,dataBeen.get(6));
-//        } else if (position == ASD5) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(5));
-//        } else if (position == ASD7) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(7));
-//        } else if (position == ASD8) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(8));
-//        } else if (position == ASD9) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(9));
-//        } else if (position == ASD10) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(10));
-//        } else if (position == ASD11) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(11));
-//        } else if (position == ASD12) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(12));
-//        } else if (position == ASD13) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(13));
-//        } else if (position == ASD14) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(14));
-//        } else if (position == ASD15) {
-//            ViewHolder0 viewholder0 = (ViewHolder0) holder;
-//            viewholder0.setData(dataBeen.get(15));
-//        }
 
 
     }
@@ -275,7 +141,7 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
 
         }
 
-        public void setData(FenQuBean.DataBean dataBean) {
+        public void setData(final FenQuBean.DataBean dataBean) {
             GVAdapter adapter = new GVAdapter(context, dataBean);
             gridviewrecyl.setAdapter(adapter);
             shenmequ.setText(dataBean.getTitle());
@@ -307,6 +173,16 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
 
                 //设置动画效果-手风琴效果
                 banner.setBannerAnimation(AccordionTransformer.class);
+
+                banner.setOnBannerListener(new OnBannerListener() {
+                    @Override
+                    public void OnBannerClick(int position) {
+                        if (imageUrls != null) {
+                            Toast.makeText(context, "被点击了" + "" + dataBean.getBanner().getBottom().get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });
             } else {
                 banner.setVisibility(View.GONE);
             }
