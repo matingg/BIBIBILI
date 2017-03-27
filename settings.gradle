@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':flowlayout-lib', ':flowlayout'
 include ':SlidingMenu_library'

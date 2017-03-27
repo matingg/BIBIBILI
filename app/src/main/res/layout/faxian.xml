@@ -31,13 +31,14 @@
             android:textSize="16dp"/>
 
 
+
         <com.zhy.view.flowlayout.TagFlowLayout
             android:id="@+id/id_flowlayout1"
             android:background="?android:attr/selectableItemBackground"
             android:layout_width="fill_parent"
             android:layout_height="112dp"
             android:padding="5dp"
-            zhy:max_select="-1">
+            zhy:max_select="1">
         </com.zhy.view.flowlayout.TagFlowLayout>
 
 
@@ -53,7 +54,7 @@
                 android:background="?android:attr/selectableItemBackground"
                 android:layout_height="match_parent"
                 android:padding="5dp"
-                zhy:max_select="-1"
+                zhy:max_select="1"
                 >
             </com.zhy.view.flowlayout.TagFlowLayout>
 

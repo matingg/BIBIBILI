@@ -1,7 +1,10 @@
 package com.mashaoting.bibibili.recommend.fragment;
 
+import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.mashaoting.bibibili.R;
@@ -25,6 +28,10 @@ public class DongTaiFragment extends BaseFragment {
     EditText edittex1t;
     @InjectView(R.id.usernameWrapper)
     TextInputLayout usernameWrapper;
+    @InjectView(R.id.usernameWrapper1)
+    TextInputLayout usernameWrapper1;
+    @InjectView(R.id.usernameWrapper2)
+    TextInputLayout usernameWrapper2;
 
     @Override
     public View initView() {
@@ -53,14 +60,14 @@ public class DongTaiFragment extends BaseFragment {
         matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
     public void onClick(View v) {
 //        hideKeyboard();
 
         String username = usernameWrapper.getEditText().getText().toString();
         if (!validateEmail(username)) {
             usernameWrapper.setError("Not a valid email address!");
-        }
-        else {
+        } else {
             usernameWrapper.setErrorEnabled(false);
         }
     }
@@ -69,6 +76,14 @@ public class DongTaiFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.reset(this);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.inject(this, rootView);
+        return rootView;
     }
 }
 

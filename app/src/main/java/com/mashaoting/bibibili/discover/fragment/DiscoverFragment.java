@@ -2,8 +2,8 @@ package com.mashaoting.bibibili.discover.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.mashaoting.bibibili.MainActivity;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.base.BaseFragment;
 import com.mashaoting.bibibili.discover.activity.XingQuQuanActivity;
@@ -25,6 +24,7 @@ import com.zhy.view.flowlayout.TagFlowLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -64,6 +64,8 @@ public class DiscoverFragment extends BaseFragment {
     @InjectView(R.id.quanqu)
     TextView quanqu;
     private FaXianBean faXianBean;
+    private List<String> stringList;
+    private LayoutInflater mInflater;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -92,63 +94,20 @@ public class DiscoverFragment extends BaseFragment {
     }
 
 
-    private void initListener1(final List<FaXianBean.DataBean.ListBean> list) {
-
-        List<String> stringList = new ArrayList<>();
+    private void initListener(final List<FaXianBean.DataBean.ListBean> list) {
+        stringList = new ArrayList<>();
         for (int i = 0; i < list.size(); i++) {
             stringList.add(list.get(i).getKeyword());
         }
 
-        idFlowlayout1.setAdapter(new TagAdapter<String>(stringList) {
-            @Override
-            public View getView(FlowLayout parent, final int position, String s) {
-                TextView tv = new TextView(context);
-                tv.setText(s);
-                tv.setTextSize(20);
-
-                tv.setBackgroundResource(R.drawable.tututu);
-
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(context, "被点击了" + list.get(position).getKeyword(), Toast.LENGTH_SHORT).show();
-                        
-                    }
-                });
-                return tv;
-            }
-        });
 
     }
 
 
-    private void initListener(final List<FaXianBean.DataBean.ListBean> list) {
 
-        List<String> stringList = new ArrayList<>();
-        for (int i = 0; i < list.size(); i++) {
-            stringList.add(list.get(i).getKeyword());
-        }
-
-        idFlowlayout.setAdapter(new TagAdapter<String>(stringList) {
-            @Override
-            public View getView(FlowLayout parent, final int position, String s) {
-                TextView tv = new TextView(context);
-                tv.setText(s);
-                tv.setTextSize(20);
-
-                tv.setBackgroundResource(R.drawable.tututu);
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(context, "被点击了" + list.get(position).getKeyword(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(context, MainActivity.class);
-
-                        startActivity(intent);
-                    }
-                });
-                return tv;
-            }
-        });
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        mInflater = LayoutInflater.from(getActivity());
 
     }
 
@@ -162,20 +121,25 @@ public class DiscoverFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e("TAG", "DiscoverFragment onError()" + e + id);
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Gson gson = new Gson();
                         faXianBean = gson.fromJson(response, FaXianBean.class);
-                        Log.e("TAG", "DiscoverFragment ----onResponse()" + response);
-                        initListener1(faXianBean.getData().getList());
+
+
+                        if(faXianBean != null) {
+                            initText1();
+                            inittext2();
+                        }
+
                     }
                 });
 
 
     }
+
 
 
     @OnClick({R.id.tv_sousu, R.id.tv_more, R.id.tv_more2, R.id.xingququan0, R.id.huati1, R.id.huodong2, R.id.xiaoheiwu, R.id.yuanchuang, R.id.quanqu})
@@ -184,26 +148,26 @@ public class DiscoverFragment extends BaseFragment {
             case R.id.tv_sousu:
                 break;
             case R.id.tv_more:
+
                 idFlowlayout1.setVisibility(View.GONE);
                 nestedscrllview.setVisibility(View.VISIBLE);
                 tvMore.setVisibility(View.GONE);
                 tvMore2.setVisibility(View.VISIBLE);
-                if (faXianBean != null) {
-                    initListener(faXianBean.getData().getList());
-                }
-
+                initText1();
                 break;
+
+
             case R.id.tv_more2:
+
                 idFlowlayout1.setVisibility(View.VISIBLE);
                 nestedscrllview.setVisibility(View.GONE);
                 tvMore2.setVisibility(View.GONE);
                 tvMore.setVisibility(View.VISIBLE);
-                if (faXianBean != null) {
-                    initListener(faXianBean.getData().getList());
-                }
-                    break ;
+                inittext2();
+                break;
+
             case R.id.xingququan0:
-                Intent intent = new Intent(getActivity() , XingQuQuanActivity.class);
+                Intent intent = new Intent(getActivity(), XingQuQuanActivity.class);
                 startActivity(intent);
                 Toast.makeText(context, "兴趣圈", Toast.LENGTH_SHORT).show();
                 break;
@@ -223,5 +187,86 @@ public class DiscoverFragment extends BaseFragment {
                 Toast.makeText(context, "全区", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void inittext2() {
+        idFlowlayout.setAdapter(new TagAdapter<String>(stringList) {
+
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView tv = (TextView) mInflater.inflate(R.layout.tv,
+                        idFlowlayout1, false);
+                tv.setText(s);
+                return tv;
+            }
+
+            @Override
+            public boolean setSelected(int position, String s) {
+                return s.equals("Android");
+            }
+        });
+
+        idFlowlayout1.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                Toast.makeText(getActivity(), stringList.get(position), Toast.LENGTH_SHORT).show();
+                //view.setVisibility(View.GONE);
+                return true;
+            }
+        });
+
+
+        idFlowlayout1.setOnSelectListener(new TagFlowLayout.OnSelectListener() {
+            @Override
+            public void onSelected(Set<Integer> selectPosSet) {
+                getActivity().setTitle("choose:" + selectPosSet.toString());
+            }
+        });
+    }
+
+
+    private void initText1() {
+
+        initListener(faXianBean.getData().getList());
+        idFlowlayout1.setAdapter(new TagAdapter<String>(stringList) {
+
+            @Override
+            public View getView(FlowLayout parent, int position, String s) {
+                TextView tv = (TextView) mInflater.inflate(R.layout.tv,
+                        idFlowlayout1, false);
+                tv.setText(s);
+                return tv;
+            }
+
+            @Override
+            public boolean setSelected(int position, String s) {
+                return s.equals("Android");
+            }
+        });
+
+        idFlowlayout.setOnTagClickListener(new TagFlowLayout.OnTagClickListener() {
+            @Override
+            public boolean onTagClick(View view, int position, FlowLayout parent) {
+                Toast.makeText(getActivity(), stringList.get(position), Toast.LENGTH_SHORT).show();
+//                            view.setVisibility(View.GONE);
+                return true;
+            }
+        });
+
     }
 }
