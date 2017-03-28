@@ -1,17 +1,21 @@
 package com.mashaoting.bibibili.directplay.dianjitiaozhuanyemian;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.directplay.bean.DirectplayZBBean;
+import com.mashaoting.bibibili.shipin.DanmakuVideoPlayer;
+import com.mashaoting.bibibili.shipin.DanmkuVideoActivity;
 
 import java.util.List;
 
@@ -24,14 +28,14 @@ import butterknife.InjectView;
 
 public class GridViewAdapter extends BaseAdapter {
 
-    private final List<DirectplayZBBean.DataBean.PartitionsBean> dataBean;
 
-    private Context context;
-    private DirectplayZBBean.DataBean.PartitionsBean partitionsBean;
+    private final List<DirectplayZBBean.DataBean.PartitionsBean.LivesBean> dataBean;
+    public Context context;
+    private DirectplayZBBean.DataBean.PartitionsBean.LivesBean livesBean;
 
-    public GridViewAdapter(Context context, List<DirectplayZBBean.DataBean.PartitionsBean> partitions) {
+    public GridViewAdapter(Context context, List<DirectplayZBBean.DataBean.PartitionsBean.LivesBean> lives) {
         this.context = context;
-        dataBean = partitions;
+        dataBean = lives;
     }
 
 
@@ -60,12 +64,12 @@ public class GridViewAdapter extends BaseAdapter {
 
         }
         viewHolder = (ViewHolder) convertView.getTag();
-        partitionsBean = dataBean.get(position);
+        livesBean = dataBean.get(position);
 
-        viewHolder.tvGridviewBiaoti.setText(partitionsBean.getLives().get(position).getTitle());
-        viewHolder.tvName.setText(partitionsBean.getLives().get(position).getOwner().getName());
-        viewHolder.guanzhonggeshu.setText("" + partitionsBean.getLives().get(position).getRoom_id() + "");
-        Glide.with(context).load(partitionsBean.getLives().get(position).getCover().getSrc()).centerCrop().diskCacheStrategy(DiskCacheStrategy.ALL)
+        viewHolder.tvGridviewBiaoti.setText(livesBean.getTitle());
+        viewHolder.tvName.setText(livesBean.getOwner().getName());
+        viewHolder.guanzhonggeshu.setText(""+livesBean.getOnline() );
+        Glide.with(context).load(livesBean.getCover().getSrc())
                 .transform(new CornersTransform(context))
                 .error(R.drawable.ic_header_activity_center)
                 .crossFade()
@@ -73,7 +77,7 @@ public class GridViewAdapter extends BaseAdapter {
         return convertView;
     }
 
-    static class ViewHolder {
+     class ViewHolder {
         @InjectView(R.id.iv_gridview)
         ImageView ivGridview;
         @InjectView(R.id.tv_gridview_biaoti)
@@ -86,13 +90,29 @@ public class GridViewAdapter extends BaseAdapter {
         TextView guanzhonggeshu;
         @InjectView(R.id.cardView)
         CardView cardView;
+        @InjectView(R.id.linear_dianjibofang)
+        LinearLayout linearDianjibofang;
+
+
         ViewHolder(View view) {
             ButterKnife.inject(this, view);
             cardView.setRadius(20);//设置图片圆角的半径大小
 
             cardView.setCardElevation(20);//设置阴影部分大小
 
-            cardView.setContentPadding(15,15,15,15);//设置图片距离阴影大小
+            cardView.setContentPadding(15, 15, 15, 15);//设置图片距离阴影大小
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent intent = new Intent(context , DanmkuVideoActivity.class);
+//
+//                    context.startActivity(intent);
+//                }
+//            });
+
+
         }
+
+
     }
 }

@@ -1,5 +1,6 @@
 package com.mashaoting.bibibili;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -7,6 +8,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -15,20 +17,30 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import com.mashaoting.bibibili.adapter.LisViewAdapter;
 import com.mashaoting.bibibili.adapter.MyViewPagerAdapter;
 import com.mashaoting.bibibili.base.BaseoActivity;
 import com.mashaoting.bibibili.directplay.fragment.DirectplayFragment;
+import com.mashaoting.bibibili.discover.activity.TagFaXianActivity;
+import com.mashaoting.bibibili.discover.bean.FaXianBean;
+import com.mashaoting.bibibili.discover.bean.TagFaxianZonghe;
 import com.mashaoting.bibibili.discover.fragment.DiscoverFragment;
+import com.mashaoting.bibibili.discover.fragment.FragmentOne;
 import com.mashaoting.bibibili.pursueplay.fragment.PursuePlayFragment;
 import com.mashaoting.bibibili.recommend.fragment.RecommendFragment;
 import com.mashaoting.bibibili.subarea.fragment.SubareaFragment;
+import com.mashaoting.bibibili.utils.NetId;
 import com.wyt.searchbox.SearchFragment;
 import com.wyt.searchbox.custom.IOnSearchClickListener;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.StringCallback;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import okhttp3.Call;
 
 public class MainActivity extends BaseoActivity {
 
@@ -60,6 +72,7 @@ public class MainActivity extends BaseoActivity {
     ListView lvMain0;
     @InjectView(R.id.title_iv_right_menu2)
     ImageView titleIvRightMenu2;
+    private TagFaxianZonghe tagFaxianZonghe;
 
 
     @Override
@@ -134,9 +147,17 @@ public class MainActivity extends BaseoActivity {
                 SearchFragment searchFragment = SearchFragment.newInstance();
                 searchFragment.setOnSearchClickListener(new IOnSearchClickListener() {
                     @Override
-                    public void OnSearchClick(String keyword) {
+                    public void OnSearchClick(final String keyword) {
                         //这里处理逻辑
                         Toast.makeText(MainActivity.this, keyword, Toast.LENGTH_SHORT).show();
+                        if (keyword != null){
+                            Intent intent = new Intent(MainActivity.this , TagFaXianActivity.class);
+                            intent.putExtra("id",keyword);
+                            startActivity(intent);
+                        }
+
+
+
                     }
                 });
                 searchFragment.show(getSupportFragmentManager(), SearchFragment.TAG);

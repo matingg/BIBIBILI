@@ -1,5 +1,6 @@
 package com.mashaoting.bibibili.directplay.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**

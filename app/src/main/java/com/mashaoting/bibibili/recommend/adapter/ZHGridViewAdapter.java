@@ -70,8 +70,6 @@ public class ZHGridViewAdapter extends BaseAdapter {
         viewHolder.tvTime.setText(utilstime.getDateTimeFromMillisecond((long) dataBean.getCtime()/3600));
         viewHolder.tvBiaoti.setText(dataBean.getTitle()); //标题
         viewHolder.tvLeixing.setText(dataBean.getTname());
-        Log.e("TAG", "ZHGridViewAdapter getView()"+dataBean.getTname());
-//        Glide.with(context).load(dataBean.getCover()).into(viewHolder.ivZongheItemTupian);
         Glide.with(context).load(dataBean.getCover())
                 .transform(new CornersTransform(context))
                 .placeholder(R.drawable.live_home_live_center)
