@@ -1,9 +1,12 @@
 package com.mashaoting.bibibili.subarea.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +15,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.mashaoting.bibibili.R;
+import com.mashaoting.bibibili.subarea.TestActivity;
 import com.mashaoting.bibibili.subarea.bean.FenQuBean;
+import com.mashaoting.bibibili.subarea.bean.JavasBean;
 import com.youth.banner.Banner;
 import com.youth.banner.listener.OnBannerListener;
 import com.youth.banner.loader.ImageLoader;
@@ -141,20 +146,39 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
 
         }
 
+
+
         public void setData(final FenQuBean.DataBean dataBean) {
             GVAdapter adapter = new GVAdapter(context, dataBean);
             gridviewrecyl.setAdapter(adapter);
+            gridviewrecyl.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    Toast.makeText(context ,position+"kl" ,Toast.LENGTH_SHORT).show();
+                    String tou = dataBean.getBody().get(position).getTitle() ;
+                    String tuid = dataBean.getBody().get(position).getCover() ;
+                    int danmuku = dataBean.getBody().get(position).getDanmaku() ;
+
+                    Log.e("TAG", "跳转前111: "+dataBean.getBody().get(position).getParam() );
+                    JavasBean javasBean = new JavasBean();
+                    javasBean.setTou(tou);
+                    javasBean.setTuid(tuid);
+                    javasBean.setDanmuku(danmuku);
+                    javasBean.setId(Integer.parseInt(dataBean.getBody().get(position).getParam()));
+                    Intent intent = new Intent(context ,TestActivity.class);
+                    intent.putExtra("ui" , javasBean);
+                    context.startActivity(intent);
+                    Log.e("TAG", "跳转前33: "+javasBean.getId() );
+
+                }
+            });
             shenmequ.setText(dataBean.getTitle());
-
-            gengduo.setText("更多" + dataBean.getTitle());
-
-
+            gengduo.setText("" + dataBean.getTitle());
             if (dataBean.getBanner() != null) {
-
                 //准备图片集合
                 imageUrls = new ArrayList<>();
                 for (int i = 0; i < dataBean.getBanner().getBottom().size(); i++) {
-
                     imageUrls.add(dataBean.getBanner().getBottom().get(i).getImage());
                 }
                 //简单使用
@@ -162,7 +186,6 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
                         .setImageLoader(new ImageLoader() {
                             @Override
                             public void displayImage(Context context, Object path, ImageView imageView) {
-
                                 Glide.with(context)
                                         .load(path)
                                         .diskCacheStrategy(DiskCacheStrategy.SOURCE)
@@ -170,27 +193,21 @@ public class FenQuRecyclerAdapter extends RecyclerView.Adapter {
                                         .into(imageView);
                             }
                         }).start();
-
                 //设置动画效果-手风琴效果
                 banner.setBannerAnimation(AccordionTransformer.class);
-
                 banner.setOnBannerListener(new OnBannerListener() {
                     @Override
                     public void OnBannerClick(int position) {
                         if (imageUrls != null) {
                             Toast.makeText(context, "被点击了" + "" + dataBean.getBanner().getBottom().get(position).getTitle(), Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
             } else {
                 banner.setVisibility(View.GONE);
             }
-
-
         }
 
 
     }
-
 }

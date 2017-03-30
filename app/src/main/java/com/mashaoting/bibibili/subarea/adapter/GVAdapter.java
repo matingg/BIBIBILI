@@ -1,6 +1,7 @@
 package com.mashaoting.bibibili.subarea.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.directplay.dianjitiaozhuanyemian.CornersTransform;
+import com.mashaoting.bibibili.subarea.TestActivity;
 import com.mashaoting.bibibili.subarea.bean.FenQuBean;
 
 import butterknife.ButterKnife;
@@ -79,12 +81,16 @@ public class GVAdapter extends BaseAdapter {
         ViewHolder(final View view) {
             ButterKnife.inject(this, view);
 
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context , ""+textview0.getText(), Toast.LENGTH_SHORT).show();
-                }
-            });
+//            view.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText(context , ""+textview0.getText(), Toast.LENGTH_SHORT).show();
+//
+//                    Intent intent = new Intent(context ,TestActivity.class);
+//                    context.startActivity(intent);
+//
+//                }
+//            });
         }
     }
 }

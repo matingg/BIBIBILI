@@ -1,32 +1,31 @@
 package com.mashaoting.bibibili.shipin;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.mashaoting.bibibili.R;
 import com.mashaoting.bibibili.directplay.bean.Beann;
-import com.mashaoting.bibibili.directplay.bean.DirectplayZBBean;
 import com.shuyu.gsyvideoplayer.GSYPreViewManager;
 import com.shuyu.gsyvideoplayer.GSYVideoPlayer;
 import com.shuyu.gsyvideoplayer.listener.LockClickListener;
 import com.shuyu.gsyvideoplayer.utils.OrientationUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 
-import java.io.Serializable;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-
-import static android.R.attr.name;
 
 public class DanmkuVideoActivity extends AppCompatActivity {
 
@@ -36,6 +35,8 @@ public class DanmkuVideoActivity extends AppCompatActivity {
     DanmakuVideoPlayer danmakuPlayer;
     @InjectView(R.id.activity_detail_player)
     RelativeLayout activityDetailPlayer;
+    @InjectView(R.id.webview_0)
+    WebView webview;
     private boolean isPlay;
     private boolean isPause;
     private OrientationUtils orientationUtils;
@@ -59,7 +60,7 @@ public class DanmkuVideoActivity extends AppCompatActivity {
         //必须在setUp之前设置
         danmakuPlayer.setShrinkImageRes(R.drawable.custom_shrink);
         danmakuPlayer.setEnlargeImageRes(R.drawable.custom_enlarge);
-
+        initData();
 
         if (url != null) {
             danmakuPlayer.setUp(url, true, null, playname);
@@ -203,5 +204,37 @@ public class DanmkuVideoActivity extends AppCompatActivity {
         danmakuPlayer.getTitleTextView().setText("测试视频");
         danmakuPlayer.getBackButton().setVisibility(View.GONE);
     }
+
+
+    protected void initData() {
+        //设置WebView属性，能够执行Javascript脚本
+        webview.getSettings().setJavaScriptEnabled(true);
+        //加载需要显示的网页
+        webview.loadUrl("http://neihanshequ.com/");
+        //设置Web视图
+        webview.setWebViewClient(new HelloWebViewClient ());
+    }
+
+//    @Override
+//    //设置回退
+//    //覆盖Activity类的onKeyDown(int keyCoder,KeyEvent event)方法
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if ((keyCode == KeyEvent.KEYCODE_BACK) && webview.canGoBack()) {
+//            webview.goBack(); //goBack()表示返回WebView的上一页面
+//            return true;
+//        }
+//        return false;
+//    }
+
+    //Web视图
+    private class HelloWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
+        }
+    }
+
 }
+
 
