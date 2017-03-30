@@ -436,6 +436,7 @@ public class GouWuCheActivity extends AppCompatActivity {
      */
     public String getSignType() {
         return "sign_type=\"RSA\"";
+
     }
 
 
